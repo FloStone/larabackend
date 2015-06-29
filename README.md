@@ -17,3 +17,5 @@ Laravel 5.1:
 Execute:
 
 `php artisan admin:install`
+
+make sure the admin templates extends `admin.master`
