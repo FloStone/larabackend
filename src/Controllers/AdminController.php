@@ -10,9 +10,9 @@ class AdminController extends BaseController
 {
 	use DispatchesJobs, ValidatesRequests;
 
-	protected static $displayed_actions = [];
+	public static $displayed_actions = [];
 
-	protected function view($path, array $data)
+	protected function view($path, $data = [])
 	{
 		return view($path, $data)->with('actions', static::$displayed_actions);
 	}
