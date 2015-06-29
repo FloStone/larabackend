@@ -18,4 +18,4 @@ Execute:
 
 `php artisan admin:install`
 
-make sure the admin templates extends `admin.master`
+Make sure your admin templates extend `admin.master`
