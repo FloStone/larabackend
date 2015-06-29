@@ -1,0 +1,18 @@
+{
+    "name": "flo/larabackend",
+    "description": "Backend for laravel",
+    "authors": [
+        {
+            "name": "Flo5581",
+            "email": "mail@flo5581.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4" : {
+    		"Flo\\Backend\\" : "src/"
+    	},
+    	"files" : [
+    		"Autoloads\\helpers.php"
+    	]
+    }
+}
