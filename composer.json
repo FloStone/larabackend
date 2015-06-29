@@ -1,5 +1,5 @@
 {
-    "name": "flo/larabackend",
+    "name": "flo5581/larabackend",
     "description": "Backend for laravel",
     "authors": [
         {
@@ -9,7 +9,7 @@
     ],
     "autoload": {
     	"psr-4" : {
-    		"Flo5581\\Backend\\" : "src/"
+    		"Flo\\Backend\\" : "src/"
     	},
     	"files" : [
     		"Autoloads\\helpers.php"
