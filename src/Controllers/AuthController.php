@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Flo\Backend\Controllers;
 
 use Illuminate\Http\Request;
 

@@ -1,20 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Flo\Backend\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use App\Models\Participant;
-
-class AdminController extends Controller
+class AdminController extends BaseController
 {
-	public static $displayed_actions = [
-		'Index'			=> 'getIndex',
-		'Teilnehmer'	=> 'getParticipants'
-	];
+  use DispatchesJobs, ValidatesRequests;
+  
+	public static $displayed_actions = [];
 
     public function getIndex()
     {
