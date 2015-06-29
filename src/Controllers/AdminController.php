@@ -8,17 +8,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class AdminController extends BaseController
 {
-  use DispatchesJobs, ValidatesRequests;
-  
+	use DispatchesJobs, ValidatesRequests;
+
 	public static $displayed_actions = [];
 
-    public function getIndex()
-    {
-   		return view('admin.index');
-    }
-
-    public function getParticipants()
-    {
-   		return view('admin.participants');
-    }
+	public function view($path, array $data)
+	{
+		return view($path, $data)->with('actions', static::$displayed_actions);
+	}
 }
