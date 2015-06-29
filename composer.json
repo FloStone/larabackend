@@ -9,7 +9,7 @@
     ],
     "autoload": {
     	"psr-4" : {
-    		"Flo\\Backend\\" : "src/"
+    		"Flo5581\\Backend\\" : "src/"
     	},
     	"files" : [
     		"Autoloads\\helpers.php"
