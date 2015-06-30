@@ -1,0 +1,83 @@
+.clear {
+  display: table;
+  content: '';
+  clear: both;
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  font-family: 'Open Sans';
+}
+nav ul {
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  background-color: #1f1f14;
+}
+nav ul:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+nav ul li {
+  display: inline;
+  float: left;
+}
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  color: #e6e6e6;
+  padding: 8px 10px;
+  height: 40px;
+}
+nav ul li a.active {
+  background-color: #5d5d55;
+}
+.table {
+  width: 100%;
+  padding: 20px;
+}
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table table thead {
+  text-align: left;
+}
+.table table thead tr {
+  border-bottom: 2px solid lightgrey;
+}
+.table table thead tr th {
+  padding: 4px;
+  font-weight: bold;
+}
+.table table tbody tr {
+  border-bottom: 1px solid lightgrey;
+}
+.table table tbody tr td {
+  padding: 4px;
+}
+form {
+  margin: 20px;
+}
+form input,
+form textarea {
+  display: block;
+  border-radius: 4px;
+  padding: 4px;
+  border: 1px solid lightgrey;
+  width: 250px;
+}
+form label {
+  font-weight: 600;
+}
+form .formfield {
+  margin-top: 10px;
+}

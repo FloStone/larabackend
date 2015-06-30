@@ -1,0 +1,96 @@
+//FUNCTIONS AND DEFINITIONS
+
+@darkgrey:#1F1F14;
+@lightgrey:#5D5D55;
+@textwhite:#E6E6E6;
+
+.clear {
+	display:table;
+	content:'';
+	clear:both;
+}
+
+//GENERAL
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+body {
+	margin: 0;
+	font-family: 'Open Sans';
+}
+
+//NAV
+nav {
+	ul {
+		height: 40px;
+		margin: 0;
+		padding: 0;
+		background-color: @darkgrey;
+		&:after {
+			.clear;
+		}
+		li {
+			display:inline;
+			float:left;
+			a {
+				display:block;
+				text-decoration:none;
+				color:@textwhite;
+				padding: 8px 10px;
+				height: 40px;
+				&.active {
+					background-color: @lightgrey;
+				}
+			}
+		}
+	}
+}
+
+//TABLES
+.table {
+	width: 100%;
+	padding: 20px;
+	table {
+		width:100%;
+		border-collapse: collapse;
+		thead {
+			text-align: left;
+			tr {
+				border-bottom: 2px solid lightgrey;
+				th {
+					padding: 4px;
+					font-weight:bold;
+				}
+			}
+		}
+		tbody {
+			tr {
+				border-bottom:1px solid lightgrey;
+				td {
+					padding: 4px;
+				}
+			}
+		}
+	}
+}
+
+//FORMFIELDS
+form {
+	margin: 20px;
+	input, textarea {
+		display:block;
+		border-radius: 4px;
+		padding: 4px;
+		border:1px solid lightgrey;
+		width: 250px;
+	}
+	label {
+		font-weight:600;
+	}
+	.formfield {
+		margin-top: 10px;
+	}
+}
