@@ -8,8 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Database\Eloquent\Model;
 
 use Flo\Backend\Classes\ViewNotFoundException;
-
 use Flo\Backend\Classes\ViewFactory as View;
+use Flo\Backend\Classes\AdminInterface;
 
 /**
  * AdminController for Backend
@@ -17,7 +17,7 @@ use Flo\Backend\Classes\ViewFactory as View;
  * @author  Flo5581
  * @package  Flo\Backend
  */
-class AdminController extends BaseController
+class AdminController extends BaseController implements AdminInterface
 {
 	use DispatchesJobs, ValidatesRequests;
 
@@ -47,5 +47,20 @@ class AdminController extends BaseController
 		{
 			throw new ViewNotFoundException;
 		}
+	}
+
+	public function getEdit($id, $model)
+	{
+		
+	}
+
+	public function getAdd($model)
+	{
+		
+	}
+
+	public function getDelete($id, $model)
+	{
+		
 	}
 }

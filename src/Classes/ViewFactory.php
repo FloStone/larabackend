@@ -3,6 +3,7 @@
 namespace Flo\Backend\Classes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Class ViewFactory creates Admin Views with fields defined
@@ -60,7 +61,7 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addTable($custom_data = null, $editable = true)
+	public function addTable(Collection $custom_data = null, $editable = true)
 	{
 		$this->fields[] = ['table' => [$custom_data ?: $this->data, 'editable' => $editable ? true : false]];
 

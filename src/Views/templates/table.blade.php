@@ -15,7 +15,7 @@
 			@if($data['editable'])
 			<tr>
 				<td>
-					<a href="#">Add</a>
+					<a href="{{action('AdminController@getAdd', ['model' => class_replace(get_class($data[0]->first()))])}}">Add</a>
 				</td>
 				@foreach($data[0]->first()->getOriginal() as $item)
 				<td></td>	
@@ -29,8 +29,8 @@
 				<td>{{$attr}}</td>
 				@endforeach
 				@if($data['editable'])
-				<td><a href="#">Edit</a></td>
-				<td><a href="#">Delete</a></td>
+				<td><a href="{{action('AdminController@getEdit', ['id' => $item->id, 'model' => class_replace(get_class($item))])}}">Edit</a></td>
+				<td><a href="{{action('AdminController@getDelete', ['id' => $item->id, 'model' => class_replace(get_class($item))])}}">Delete</a></td>
 				@endif
 			</tr>
 			@endforeach

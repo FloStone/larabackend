@@ -25,3 +25,11 @@ if (!function_exists('is_active_route'))
 			return false;
 	}
 }
+
+if (!function_exists('class_replace'))
+{
+	function class_replace($string)
+	{
+		return str_replace('\\', '__', $string);
+	}
+}
