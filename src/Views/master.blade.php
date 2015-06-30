@@ -11,9 +11,13 @@
 		@include('admin.includes.navigation')
 		
 		@foreach($fields as $field)
-		@foreach($field as $type => $data)
-		@include("Backend::templates.$type", ['data' => $data])
-		@endforeach
+		@if(isset($field['custom']))
+		@include($field['custom'], $field['data'])
+		@else
+			@foreach($field as $type => $data)
+				@include("Backend::templates.$type", ['data' => $data])
+			@endforeach
+		@endif
 		@endforeach
 	</body>
 

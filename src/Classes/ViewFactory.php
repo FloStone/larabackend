@@ -74,7 +74,9 @@ class ViewFactory
 	 */
 	public function addCustom($template, $data = null)
 	{
+		$this->fields[] = ['custom' => $template, 'data' => $data ?: $this->data];
 
+		return $this;
 	}
 
 	/**
