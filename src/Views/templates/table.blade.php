@@ -2,20 +2,38 @@
 	<table>
 		<thead>
 			<tr>
-			@dd($data)
-			@foreach($data->first()->getOriginal() as $head => $content)
+				@foreach($data[0]->first()->getOriginal() as $head => $content)
 				<th>{{$head}}</th>
-			@endforeach
+				@endforeach
+				@if($data['editable'])
+				<th>Edit</th>
+				<th>Delete</th>
+				@endif
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($data as $item)
+			@if($data['editable'])
 			<tr>
-			@foreach($item->getOriginal() as $attr)
-				<td>{{$attr}}</td>
-			@endforeach
+				<td>
+					<a href="#">Add</a>
+				</td>
+				@foreach($data[0]->first()->getOriginal() as $item)
+				<td></td>	
+				@endforeach
+				<td></td>
 			</tr>
-		@endforeach
+			@endif
+			@foreach($data[0] as $item)
+			<tr>
+				@foreach($item->getOriginal() as $attr)
+				<td>{{$attr}}</td>
+				@endforeach
+				@if($data['editable'])
+				<td><a href="#">Edit</a></td>
+				<td><a href="#">Delete</a></td>
+				@endif
+			</tr>
+			@endforeach
 		</tbody>
 	</table>
 </div>

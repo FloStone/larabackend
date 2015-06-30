@@ -43,13 +43,15 @@ class ViewFactory
 		$this->fields = [];
 
 		// Model Initiation
-		$this->data = $model::all();
-
 		$cols = $model::$displayed_columns;
 
-		if (!is_null($cols))
+		if (!is_null($cols) && !empty($cols))
 		{
-			$this->data = $this->data->lists($cols);		
+			$this->data = $model::select($cols)->get();	
+		}
+		else
+		{
+			$this->data = $model::all();
 		}
 	}
 
@@ -60,9 +62,19 @@ class ViewFactory
 	 */
 	public function addTable($editable = true)
 	{
-		$this->fields[] = ['table' => $this->data, 'editable'];
+		$this->fields[] = ['table' => [$this->data, 'editable' => $editable ? true : false]];
 
 		return $this;
+	}
+
+	/**
+	 * Add a custom template include to the view
+	 *
+	 * @return this
+	 */
+	public function addCustom($template, $data = null)
+	{
+
 	}
 
 	/**
