@@ -8,7 +8,7 @@ class BackendProvider extends ServiceProvider
 {
 	public function boot()
 	{
-		$this->loadViewsFrom(__DIR__.'/flo5581/larabackend/Views', 'Backend');
+		$this->loadViewsFrom(__DIR__.'/Views', 'Backend');
 
 		$this->publishes([
 			__DIR__.'/Views' => base_path('resources/views/admin'),

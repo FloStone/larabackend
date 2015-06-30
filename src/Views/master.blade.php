@@ -9,7 +9,12 @@
 
 	<body>
 		@include('admin.includes.navigation')
-		@yield('content')
+		
+		@foreach($fields as $field)
+		@foreach($field as $type => $data)
+		@include("Backend::templates.$type", ['data' => $data])
+		@endforeach
+		@endforeach
 	</body>
 
 </html>

@@ -5,10 +5,16 @@ namespace Flo\Backend\Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Database\Eloquent\Model;
+
+use Flo\Backend\Classes\ViewNotFoundException;
+
+use Flo\Backend\Classes\ViewFactory as View;
 
 /**
  * AdminController for Backend
- * 
+ *
+ * @author  Flo5581
  * @package  Flo\Backend
  */
 class AdminController extends BaseController
@@ -27,8 +33,19 @@ class AdminController extends BaseController
 	 *
 	 * @return view
 	 */
-	protected function view($path, $data = [])
+	protected function view($path = null, array $data = [])
 	{
-		return view($path, $data)->with('actions', static::$displayed_actions);
+		if (class_exists($path))
+		{
+			return new View(static::$displayed_actions, $path);
+		}
+		elseif (!is_null($path))
+		{
+			return view($path, $data)->with('actions', static::$displayed_actions);
+		}
+		else
+		{
+			throw new ViewNotFoundException;
+		}
 	}
 }
