@@ -60,9 +60,9 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addTable($editable = true)
+	public function addTable($custom_data = null, $editable = true)
 	{
-		$this->fields[] = ['table' => [$this->data, 'editable' => $editable ? true : false]];
+		$this->fields[] = ['table' => [$custom_data ?: $this->data, 'editable' => $editable ? true : false]];
 
 		return $this;
 	}
