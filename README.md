@@ -43,15 +43,16 @@ Remember to protected the controller with a middleware
 
 First you need to tell the Backend what controller methods should be displayed in the menu
 A key indicates the name isplayed in the menu, the value tells the controller method
+
 `public static $displayed_actions = ['Index' => 'getIndex']`
 
 To create a view that displays a model you have to use the view method
 of the parent controller. Don't use the laravel view method!
 just pass through the model you wish to use.
 
-`public function getIndex()`
-`{`
-	`$this->view(Model::class);`
+`public function getIndex()`<br>
+`{`<br>
+	`$this->view(Model::class);`<br>
 `}`
 
 Remember that in Laravel 5.1 you can use `::class` to indicate the class you want
