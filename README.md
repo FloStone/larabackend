@@ -48,10 +48,12 @@ A key indicates the name isplayed in the menu, the value tells the controller me
 To create a view that displays a model you have to use the view method
 of the parent controller. Don't use the laravel view method!
 just pass through the model you wish to use.
+
 `public function getIndex()`
 `{`
 	`$this->view(Model::class);`
 `}`
+
 Remember that in Laravel 5.1 you can use `::class` to indicate the class you want
 to pass through. You can also use a string if you wish
 
@@ -73,3 +75,15 @@ Finally call the render method to make everything work
 
 `$this->view(Model::class)->addTable($custom_data, true)->render()`
 
+To define which columns of your model should be displayed inside the table
+you have to add
+
+`public static $displayed_columns = []`
+
+to your model and put in the fields that should be displayed
+To define the columns the can be edited by an admin, you need to add
+
+`public static $editable_columns = []`
+
+and fill it with the fields
+Keep in mind that not having those variables or having them empty will cause an error
