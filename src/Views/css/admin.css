@@ -15,6 +15,9 @@ body {
   margin: 0;
   font-family: 'Open Sans';
 }
+nav {
+  position: relative;
+}
 nav ul {
   height: 40px;
   margin: 0;
@@ -30,6 +33,9 @@ nav ul li {
   display: inline;
   float: left;
 }
+nav ul li:first-child {
+  margin-left: 20px;
+}
 nav ul li a {
   display: block;
   text-decoration: none;
@@ -39,6 +45,15 @@ nav ul li a {
 }
 nav ul li a.active {
   background-color: #5d5d55;
+}
+nav input {
+  position: absolute;
+  top: 8px;
+  right: 60px;
+  border: 0;
+  height: 24px;
+  border-radius: 2px;
+  padding: 2px 5px;
 }
 .table {
   width: 100%;
@@ -64,6 +79,13 @@ nav ul li a.active {
 .table table tbody tr td {
   padding: 4px;
 }
+.table table tbody tr td a {
+  color: #1996e8;
+  text-decoration: none;
+}
+.table table tbody tr td a:hover {
+  text-decoration: underline;
+}
 form {
   margin: 20px;
 }
@@ -80,4 +102,7 @@ form label {
 }
 form .formfield {
   margin-top: 10px;
+}
+form .submit-button {
+  margin-top: 20px;
 }

@@ -6,4 +6,5 @@
 		</li>
 		@endforeach
 	</ul>
+	<input type="search" name="search" placeholder="Search...">
 </nav>

@@ -3,6 +3,7 @@
 @darkgrey:#1F1F14;
 @lightgrey:#5D5D55;
 @textwhite:#E6E6E6;
+@lightblue: #1996E8;
 
 .clear {
 	display:table;
@@ -24,6 +25,7 @@ body {
 
 //NAV
 nav {
+	position: relative;
 	ul {
 		height: 40px;
 		margin: 0;
@@ -33,6 +35,9 @@ nav {
 			.clear;
 		}
 		li {
+			&:first-child {
+				margin-left: 20px;
+			}
 			display:inline;
 			float:left;
 			a {
@@ -46,6 +51,15 @@ nav {
 				}
 			}
 		}
+	}
+	input {
+		position: absolute;
+		top:8px;
+		right: 60px;
+		border: 0;
+		height: 24px;
+		border-radius: 2px;
+		padding: 2px 5px;
 	}
 }
 
@@ -71,6 +85,13 @@ nav {
 				border-bottom:1px solid lightgrey;
 				td {
 					padding: 4px;
+					a {
+						color:@lightblue;
+						text-decoration: none;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
 				}
 			}
 		}
@@ -92,5 +113,8 @@ form {
 	}
 	.formfield {
 		margin-top: 10px;
+	}
+	.submit-button {
+		margin-top:20px;
 	}
 }
