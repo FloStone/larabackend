@@ -4,7 +4,7 @@
 	@foreach($data['model']->getOriginal() as $column => $value)
 	<div class="formfields">
 		<label for="{{$column}}">{{$column}}</label>
-		@if($type == 'textarea')
+		@if($type == 'textarea' || $type === 'text')
 		<textarea name="{{$column}}" cols="30" rows="10" disabled="disabled">{{$value}}</textarea>
 		@elseif($type == 'password')
 		@else

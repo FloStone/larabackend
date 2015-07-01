@@ -3,7 +3,7 @@
 	@foreach($data['formfields'] as $type => $name)
 	<div class="formfields">
 		<label for="{{$name}}">{{$name}}</label>
-		@if($type === 'textarea')
+		@if($type === 'textarea' || $type === 'text')
 		<textarea name="{{$name}}" cols="30" rows="10" value="{{$data['model']->$name}}"></textarea>
 		@elseif($type === 'password')
 		<input type="password" name="{{$name}}">
