@@ -3,7 +3,7 @@
 namespace Flo\Backend\Classes;
 
 /**
- * Exception when a view does not exist
+ * Exception when a model does not exist
  */
 class ModelNotFoundException extends \Exception
 {

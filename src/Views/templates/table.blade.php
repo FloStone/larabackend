@@ -2,6 +2,7 @@
 	<table>
 		<thead>
 			<tr>
+				@if($data[0]->first())
 				@foreach($data[0]->first()->getOriginal() as $head => $content)
 				<th>{{$head}}</th>
 				@endforeach
@@ -9,9 +10,11 @@
 				<th>Edit</th>
 				<th>Delete</th>
 				@endif
+				@endif
 			</tr>
 		</thead>
 		<tbody>
+			@if($data[0]->first())
 			@if($data['editable'])
 			<tr>
 				<td>
@@ -34,6 +37,7 @@
 				@endif
 			</tr>
 			@endforeach
+			@endif
 		</tbody>
 	</table>
 </div>

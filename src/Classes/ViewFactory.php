@@ -39,7 +39,7 @@ class ViewFactory
 	 *
 	 * @return void
 	 */
-	public function __construct(array $actions, $model)
+	public function __construct(array $actions, $model, $search = null)
 	{
 		$this->actions = $actions;
 		$this->fields = [];
@@ -57,7 +57,15 @@ class ViewFactory
 
 		if (!is_null($cols) && !empty($cols))
 		{
-			$this->data = $model::select($cols)->get();	
+			if ($search)
+			{
+				$this->data = $model::select($cols)->whereRaw($this->getSearchQuery($search))->get();
+			}
+			else
+			{
+				$this->data = $model::select($cols)->get();
+			}
+
 		}
 		else
 		{
@@ -128,5 +136,33 @@ class ViewFactory
 	public function render()
 	{
 		return view('Backend::master', ['fields' => $this->fields, 'actions' => $this->actions]);
+	}
+
+	/**
+	 * Generates a query to use search using $searchable_fields
+	 *
+	 * @return string
+	 */
+	private function getSearchQuery($search)
+	{
+		$model = $this->model;
+		$columns = $model::$searchable_columns;
+
+		$query = '';
+		$i = 1;
+		$count = (int)count($columns);
+
+		foreach($columns as $field)
+		{
+			$query = $query . "`$field` like '%$search%' ";
+
+			if ($i < $count)
+			{
+				$query = $query . 'OR ';
+				$i++;
+			}
+		}
+
+		return $query;
 	}
 }

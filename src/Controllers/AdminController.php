@@ -40,7 +40,7 @@ class AdminController extends BaseController implements AdminInterface
 	{
 		if (class_exists($model))
 		{
-			return new View(static::$displayed_actions, $model);
+			return new View(static::$displayed_actions, $model, Input::has('search') ? Input::get('search') : null);
 		}
 		else
 		{

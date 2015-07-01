@@ -90,4 +90,4 @@ Additionally you should indicate what type of field this is using the key
 
 `public static $editable_columns = ['text' => 'email']`
 
-Keep in mind that not having those variables or having them empty will cause an error
+Keep in mind that not having this variable or having it empty will cause an error
