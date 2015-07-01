@@ -4,6 +4,7 @@ namespace Flo\Backend\Classes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Flo\Backend\Classes\EditableColumnsException;
 
 /**
  * Class ViewFactory creates Admin Views with fields defined
@@ -42,9 +43,17 @@ class ViewFactory
 	{
 		$this->actions = $actions;
 		$this->fields = [];
+		$this->model = $model;
 
 		// Model Initiation
-		$cols = $model::$displayed_columns;
+		if (array_search('id', $model::$displayed_columns))
+		{
+			$cols = $model::$displayed_columns;	
+		}
+		else
+		{
+			$cols = array_merge(['id'], $model::$displayed_columns);
+		}
 
 		if (!is_null($cols) && !empty($cols))
 		{
@@ -85,9 +94,28 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addForm()
+	public function addForm($type, $id = null, $custom_data = null)
 	{
-		$this->fields[] = ['form' => null];
+		$model = $this->model;
+
+		if (isset($model::$editable_columns))
+		{
+			if (empty($model::$editable_columns))
+				throw new EditableColumnsException('empty');
+
+			$formfields = $model::$editable_columns;
+		}
+		else
+		{
+			throw new EditableColumnsException('undefined');
+		}
+
+		if ($type == DELETE || $type == EDIT)
+		{
+			$model = $model::where('id', $id)->first();
+		}
+
+		$this->fields[] = [$type.'_form' => ['formfields' => $formfields, 'model' => $model]];
 
 		return $this;
 	}

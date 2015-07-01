@@ -1,5 +1,6 @@
 <div class="form">
-	<form action="#">
+@dd($data)
+	<form action="{{action('AdminController@postEdit')}}">
 		<div class="formfield">
 			<label for="text">Text</label>
 			<input type="text">

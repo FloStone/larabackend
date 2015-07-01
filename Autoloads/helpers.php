@@ -1,5 +1,9 @@
 <?php
 
+define('EDIT', 'edit');
+define('DELETE', 'delete');
+define('ADD', 'add');
+
 if (!function_exists('norm_action'))
 {
 	function norm_action($action)
@@ -30,6 +34,11 @@ if (!function_exists('class_replace'))
 {
 	function class_replace($string)
 	{
-		return str_replace('\\', '__', $string);
+		if (stripos($string, '\\') !== false)
+			return str_replace('\\', '__', $string);
+		elseif (strpos($string, '__') !== false)
+			return str_replace('__', '\\', $string);
+		else
+			return $string;
 	}
 }

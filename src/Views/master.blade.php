@@ -7,10 +7,10 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
 		<meta charset="utf-8">
 	</head>
-
 	<body>
 		@include('admin.includes.navigation')
-		
+
+		@if(isset($fields))
 		@foreach($fields as $field)
 		@if(isset($field['custom']))
 		@include($field['custom'], $field['data'])
@@ -20,6 +20,7 @@
 			@endforeach
 		@endif
 		@endforeach
+		@endif
 	</body>
 
 </html>

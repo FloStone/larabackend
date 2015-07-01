@@ -11,7 +11,6 @@ class BackendProvider extends ServiceProvider
 		$this->loadViewsFrom(__DIR__.'/Views', 'Backend');
 
 		$this->publishes([
-			__DIR__.'/Views' => base_path('resources/views/admin'),
 			__DIR__.'/Views/css' => public_path('/css')
 		]);
 	}
