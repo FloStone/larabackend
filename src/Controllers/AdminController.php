@@ -126,7 +126,18 @@ class AdminController extends BaseController implements AdminInterface
 	 */
 	public function postAdd($model)
 	{
-		
+		$model = class_replace($model);
+
+		$class = new $model;
+
+		foreach($model::$editable_columns as $column)
+		{
+			$class->$column = Input::get($column);
+		}
+
+		$class->save();
+
+		return redirect('admin');
 	}
 
 	/**

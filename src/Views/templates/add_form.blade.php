@@ -1,14 +1,14 @@
 <div class="form">
-	<form method="post" action="{{action('AdminController@postAdd', ['model' => class_replace(get_class($data['model']))])}}">
+	<form method="post" action="{{action('AdminController@postAdd', ['model' => class_replace($data['model'])])}}">
 	@foreach($data['formfields'] as $type => $name)
 	<div class="formfields">
 		<label for="{{$name}}">{{$name}}</label>
-		@if($type == 'textarea')
+		@if($type === 'textarea')
 		<textarea name="{{$name}}" cols="30" rows="10"></textarea>
-		@elseif($type == 'password')
+		@elseif($type === 'password')
 		<input type="password" name="{{$name}}">
 		@else
-		<input type="text", name="{{$name}}" value="{{$data['model']->$name}}">
+		<input type="text", name="{{$name}}">
 		@endif
 	</div>
 	@endforeach

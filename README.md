@@ -79,12 +79,15 @@ Finally call the render method to make everything work
 To define which columns of your model should be displayed inside the table
 you have to add
 
-`public static $displayed_columns = []`
+`public static $displayed_columns = ['email', 'name']`
 
 to your model and put in the fields that should be displayed
 To define the columns the can be edited by an admin, you need to add
 
-`public static $editable_columns = []`
+`public static $editable_columns = ['email']`
 
-and fill it with the fields
+Additionally you should indicate what type of field this is using the key
+
+`public static $editable_columns = ['text' => 'email']`
+
 Keep in mind that not having those variables or having them empty will cause an error
