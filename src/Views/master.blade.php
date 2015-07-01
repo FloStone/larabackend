@@ -8,7 +8,7 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		@include('admin.includes.navigation')
+		@include('Backend::includes.navigation')
 
 		@if(isset($fields))
 		@foreach($fields as $field)
