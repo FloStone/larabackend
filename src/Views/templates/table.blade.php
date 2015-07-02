@@ -40,4 +40,7 @@
 			@endif
 		</tbody>
 	</table>
+	<div class="pagination-container">
+		{!!$data[0]->appends(Request::input())->render()!!}
+	</div>
 </div>

@@ -33,14 +33,15 @@ class AdminController extends BaseController implements AdminInterface
 	/**
 	 * Returns the view given
 	 *
-	 * @param strin $model [<description>]
+	 * @param string $model
+	 * @param int $pagination
 	 * @return view
 	 */
-	protected function view($model = null, array $data = [])
+	protected function view($model = null, $pagination = 20)
 	{
 		if (class_exists($model))
 		{
-			return new View(static::$displayed_actions, $model, Input::has('search') ? Input::get('search') : null);
+			return new View(static::$displayed_actions, $model, Input::has('search') ? Input::get('search') : null, $pagination);
 		}
 		else
 		{

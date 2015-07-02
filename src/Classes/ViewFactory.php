@@ -39,7 +39,7 @@ class ViewFactory
 	 *
 	 * @return void
 	 */
-	public function __construct(array $actions, $model, $search = null)
+	public function __construct(array $actions, $model, $search = null, $pagination)
 	{
 		$this->actions = $actions;
 		$this->fields = [];
@@ -59,11 +59,11 @@ class ViewFactory
 		{
 			if ($search)
 			{
-				$this->data = $model::select($cols)->whereRaw($this->getSearchQuery($search))->get();
+				$this->data = $model::select($cols)->whereRaw($this->getSearchQuery($search))->paginate($pagination);
 			}
 			else
 			{
-				$this->data = $model::select($cols)->get();
+				$this->data = $model::select($cols)->paginate($pagination);
 			}
 
 		}

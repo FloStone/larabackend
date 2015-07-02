@@ -2,7 +2,7 @@
 
 ##Installation
 
-Add package to composer.json:
+###Add package to composer.json:
 
 "flo5581/larabackend" : "dev-master"
 
@@ -14,13 +14,25 @@ Laravel 5.1:
 
 `\Flo\Backend\Commands\AdminInstallation::class`
 
-Register Service Provider:
+###Register Service Provider:
 
 `'Flo\Backend\BackendProvider'`
+`'Flo5581\Larahelpers\BladeExtensions'`
+`'Maatwebsite\Excel\ExcelServiceProvider'`
 
 Laravel 5.1:
 
 `Flo\Backend\BackendProvider::class`
+`Flo5581\Larahelpers\BladeExtensions::class`
+`Maatwebsite\Excel\ExcelServiceProvider::class`
+
+###Add Facades
+
+`'Excel' => 'Maatwebsite\Excel\Facades\Excel'`
+
+Laravel 5.1:
+
+`'Excel' => Maatwebsite\Excel\Facades\Excel::class`
 
 Execute:
 

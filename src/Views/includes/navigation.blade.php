@@ -7,7 +7,9 @@
 		</li>
 		@endforeach
 	</ul>
+	@if(isset($active))
 	<form method="get" action="{{action('AdminController@'.$active)}}">
 		<input type="search" name="search" placeholder="Search...">
 	</form>
+	@endif
 </nav>
