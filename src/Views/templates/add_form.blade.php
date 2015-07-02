@@ -1,14 +1,15 @@
 <div class="form">
 	<form method="post" action="{{action('AdminController@postAdd', ['model' => class_replace($data['model'])])}}">
-	@foreach($data['formfields'] as $type => $name)
+	@foreach($data['formfields'] as $column => $properties)
 	<div class="formfields">
-		<label for="{{$name}}">{{$name}}</label>
-		@if($type === 'textarea' || $type === 'text')
-		<textarea name="{{$name}}" cols="30" rows="10"></textarea>
-		@elseif($type === 'password')
-		<input type="password" name="{{$name}}">
+		<label for="{{$column}}">{{$properties['label'] ?: $type}}</label>
+		@if($properties['type'] === 'textarea' || $properties['type'] === 'text')
+		<textarea name="{{$column}}" cols="30" rows="10">
+		</textarea>
+		@elseif($properties['type'] === 'password')
+		<input type="password" name="{{$column}}">
 		@else
-		<input type="text", name="{{$name}}">
+		<input type="text" name="{{$column}}">
 		@endif
 	</div>
 	@endforeach

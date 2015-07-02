@@ -110,7 +110,7 @@ class AdminController extends BaseController implements AdminInterface
 		$model = class_replace($model);
 
 		$class = $model::find($id);
-		foreach($model::$editable_columns as $column)
+		foreach(array_keys($model::$editable_columns) as $column)
 		{
 			$class->$column = Input::get($column);
 		}
@@ -132,7 +132,7 @@ class AdminController extends BaseController implements AdminInterface
 
 		$class = new $model;
 
-		foreach($model::$editable_columns as $column)
+		foreach(array_keys($model::$editable_columns) as $column)
 		{
 			$class->$column = Input::get($column);
 		}
