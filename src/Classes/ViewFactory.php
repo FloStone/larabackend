@@ -39,7 +39,7 @@ class ViewFactory
 	 *
 	 * @return void
 	 */
-	public function __construct(array $actions, $model, $search = null, $pagination)
+	public function __construct(array $actions, $model, $search = null, $pagination = null)
 	{
 		$this->actions = $actions;
 		$this->fields = [];

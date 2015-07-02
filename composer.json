@@ -15,5 +15,9 @@
     	"files" : [
     		"Autoloads\\helpers.php"
     	]
+    },
+    "require": {
+        "flo5581/larahelpers": "dev-master",
+        "maatwebsite/excel": "~2.0.0"
     }
 }
