@@ -43,7 +43,7 @@ Make sure your admin templates extend `Backend::master`
 ##Usage
 
 Before you do anything:
-Create a controller that extends
+Create a controller called AdminController that extends
 
 `Flo\Backend\Controllers\AdminController`
 
@@ -96,11 +96,12 @@ you have to add
 to your model and put in the fields that should be displayed
 To define the columns the can be edited by an admin, you need to add
 
-`public static $editable_columns = ['email']`
+`public static $editable_columns = ['email' => []]`
 
-Additionally you should indicate what type of field this is using the key
+Additionally you should can add properties to that field like setting a label that is shown
+as headline in the table
 
-`public static $editable_columns = ['text' => 'email']`
+`public static $editable_columns = ['email' => ['label' => 'E-Mail']]`
 
 Keep in mind that not having this variable or having it empty will cause an error
 
