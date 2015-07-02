@@ -1,5 +1,4 @@
 <div class="form">
-@dd($data)
 	<form action="{{action('AdminController@postEdit')}}">
 		<div class="formfield">
 			<label for="text">Text</label>

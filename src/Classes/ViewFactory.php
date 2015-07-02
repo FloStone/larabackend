@@ -46,13 +46,13 @@ class ViewFactory
 		$this->model = $model;
 
 		// Model Initiation
-		if (array_search('id', $model::$displayed_columns))
+		if (isset($model::$displayed_columns['id']))
 		{
-			$cols = $model::$displayed_columns;	
+			$cols = array_keys($model::$displayed_columns);	
 		}
 		else
 		{
-			$cols = array_merge(['id'], $model::$displayed_columns);
+			$cols = array_merge(['id'], array_keys($model::$displayed_columns));
 		}
 
 		if (!is_null($cols) && !empty($cols))
@@ -65,7 +65,6 @@ class ViewFactory
 			{
 				$this->data = $model::select($cols)->paginate($pagination);
 			}
-
 		}
 		else
 		{
@@ -80,7 +79,7 @@ class ViewFactory
 	 */
 	public function addTable(Collection $custom_data = null, $editable = true)
 	{
-		$this->fields[] = ['table' => [$custom_data ?: $this->data, 'editable' => $editable ? true : false]];
+		$this->fields[] = ['table' => ['data' => $custom_data ?: $this->data, 'editable' => $editable ? true : false, 'model' => $this->model]];
 
 		return $this;
 	}
@@ -102,7 +101,7 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addForm($type, $id = null, $custom_data = null)
+	public function addForm($type, $id = null, Collection $custom_data = null)
 	{
 		$model = $this->model;
 
@@ -128,9 +127,13 @@ class ViewFactory
 		return $this;
 	}
 
-	public function addExport($type)
+	public function addExport($type, Collection $custom_data = null)
 	{
-		
+		$model = $this->model;
+
+		$this->fields[] = ['export' => [$custom_data ?: $model, 'type' => $type]];
+
+		return $this;
 	}
 
 	/**

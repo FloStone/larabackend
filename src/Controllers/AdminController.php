@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Flo\Backend\Classes\ModelNotFoundException;
 use Flo\Backend\Classes\ViewFactory as View;
 use Flo\Backend\Classes\AdminInterface;
+use Flo\Backend\Classes\ExcelDocument;
 
 /**
  * AdminController for Backend
@@ -156,5 +157,17 @@ class AdminController extends BaseController implements AdminInterface
 		$model::find($id)->delete();
 
 		return redirect('admin');
+	}
+
+	/**
+	 * Export data to an excel sheet
+	 *
+	 * @param string $model
+	 * @param string $type
+	 * @return ExcelDocument
+	 */
+	public function getExport($model, $type)
+	{
+		return new ExcelDocument($model, $type);
 	}
 }

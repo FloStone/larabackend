@@ -58,4 +58,13 @@ interface AdminInterface
 	 * @return void
 	 */
 	public function postAdd($model);
+
+	/**
+	 * Export data to an excel sheet
+	 *
+	 * @param string $model
+	 * @param string $type
+	 * @return ExcelDocument
+	 */
+	public function getExport($model, $type);
 }

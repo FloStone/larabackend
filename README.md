@@ -103,3 +103,9 @@ Additionally you should indicate what type of field this is using the key
 `public static $editable_columns = ['text' => 'email']`
 
 Keep in mind that not having this variable or having it empty will cause an error
+
+
+Add an export field by using addExport as method
+Pass through the filetype as first parameter
+
+`$this->view(Model::class)->addTable($custom_data, true)->addExport('xls')->render()`
