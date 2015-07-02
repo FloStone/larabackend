@@ -128,6 +128,11 @@ class ViewFactory
 		return $this;
 	}
 
+	public function addExport($type)
+	{
+		
+	}
+
 	/**
 	 * Render the view
 	 *
