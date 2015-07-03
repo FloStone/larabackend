@@ -2,8 +2,9 @@
 
 ##Installation
 
-###Add package to composer.json:
+###Add packages to composer.json:
 
+"flo5581/larahelpers" : "1.0.x-dev"<br>
 "flo5581/larabackend" : "dev-master"
 
 Add to Kernel.php in App\Console:
@@ -16,15 +17,15 @@ Laravel 5.1:
 
 ###Register Service Provider:
 
-`'Flo\Backend\BackendProvider'`
-`'Flo5581\Larahelpers\BladeExtensions'`
-`'Maatwebsite\Excel\ExcelServiceProvider'`
+`'Flo\Backend\BackendProvider'`<br>
+`'Flo5581\Larahelpers\BladeExtensions'`<br>
+`'Maatwebsite\Excel\ExcelServiceProvider'`<br>
 
 Laravel 5.1:
 
-`Flo\Backend\BackendProvider::class`
-`Flo5581\Larahelpers\BladeExtensions::class`
-`Maatwebsite\Excel\ExcelServiceProvider::class`
+`Flo\Backend\BackendProvider::class`<br>
+`Flo5581\Larahelpers\BladeExtensions::class`<br>
+`Maatwebsite\Excel\ExcelServiceProvider::class`<br>
 
 ###Add Facades
 
@@ -33,6 +34,14 @@ Laravel 5.1:
 Laravel 5.1:
 
 `'Excel' => Maatwebsite\Excel\Facades\Excel::class`
+
+Add this to Kernel.php in App\Console:
+
+`'\Flo\Backend\Commands\AdminInstallation'`
+
+Laravel 5.1:
+
+`\Flo\Backend\Commands\AdminInstallation::class`
 
 Execute:
 
@@ -51,7 +60,13 @@ and add the controller to your `routes.php` using
 
 `Route::controller('admin', 'YourController')`
 
-Remember to protected the controller with a middleware
+Remember to protected the controller with a middleware but when you do that
+You need to call the parent constructor as well
+
+`public function __constrcut() {`<br>
+`parent::__construct();`<br>
+``$this->middleware('admin);`<br>
+`}`
 
 First you need to tell the Backend what controller methods should be displayed in the menu
 A key indicates the name isplayed in the menu, the value tells the controller method
