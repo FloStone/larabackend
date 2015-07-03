@@ -17,15 +17,15 @@ Laravel 5.1:
 
 ###Register Service Provider:
 
-`'Flo\Backend\BackendProvider'`
-`'Flo5581\Larahelpers\BladeExtensions'`
-`'Maatwebsite\Excel\ExcelServiceProvider'`
+`'Flo\Backend\BackendProvider'`<br>
+`'Flo5581\Larahelpers\BladeExtensions'`<br>
+`'Maatwebsite\Excel\ExcelServiceProvider'`<br>
 
 Laravel 5.1:
 
-`Flo\Backend\BackendProvider::class`
-`Flo5581\Larahelpers\BladeExtensions::class`
-`Maatwebsite\Excel\ExcelServiceProvider::class`
+`Flo\Backend\BackendProvider::class`<br>
+`Flo5581\Larahelpers\BladeExtensions::class`<br>
+`Maatwebsite\Excel\ExcelServiceProvider::class`<br>
 
 ###Add Facades
 
