@@ -25,9 +25,11 @@
 				<td>
 					<a href="{{action('AdminController@getAdd', ['model' => class_replace($model)])}}">Add</a>
 				</td>
+				@if($data['data']->first())
 				@foreach($data['data']->first()->getOriginal() as $item)
 				<td></td>	
 				@endforeach
+				@endif
 				<td></td>
 			</tr>
 			@endif
