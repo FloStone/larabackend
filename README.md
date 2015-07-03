@@ -43,11 +43,11 @@ Make sure your admin templates extend `Backend::master`
 ##Usage
 
 Before you do anything:
-Create a controller called AdminController that extends
+Create a controller that extends
 
 `Flo\Backend\Controllers\AdminController`
 
-and add the controller to your `routes.php` using `admin` as URI
+and add the controller to your `routes.php` using
 
 `Route::controller('admin', 'YourController')`
 

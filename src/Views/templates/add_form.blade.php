@@ -1,5 +1,5 @@
 <div class="form">
-	<form method="post" action="{{action('AdminController@postAdd', ['model' => class_replace($data['model'])])}}">
+	<form method="post" action="{{action($controller.'@postAdd', ['model' => class_replace($data['model'])])}}">
 	@foreach($data['formfields'] as $column => $properties)
 	<div class="formfields">
 		<label for="{{$column}}">{{$properties['label'] ?: $type}}</label>

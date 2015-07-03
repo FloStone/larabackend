@@ -35,15 +35,23 @@ class ViewFactory
 	private $data;
 
 	/**
+	 * Called controller
+	 *
+	 * @var string
+	 */
+	private $controller;
+
+	/**
 	 * Basic construction
 	 *
 	 * @return void
 	 */
-	public function __construct(array $actions, $model, $search = null, $pagination = null)
+	public function __construct(array $actions, $model, $controller, $search = null, $pagination = null)
 	{
 		$this->actions = $actions;
 		$this->fields = [];
 		$this->model = $model;
+		$this->controller = $controller;
 
 		// Model Initiation
 		if (isset($model::$displayed_columns['id']))
@@ -143,7 +151,7 @@ class ViewFactory
 	 */
 	public function render()
 	{
-		return view('Backend::master', ['fields' => $this->fields, 'actions' => $this->actions]);
+		return view('Backend::master', ['fields' => $this->fields, 'actions' => $this->actions, 'controller' => $this->controller]);
 	}
 
 	/**

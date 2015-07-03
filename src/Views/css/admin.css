@@ -97,6 +97,9 @@ form textarea {
   border: 1px solid lightgrey;
   width: 250px;
 }
+form input[type="checkbox"] {
+  width: auto;
+}
 form label {
   font-weight: 600;
 }
@@ -105,4 +108,57 @@ form .formfield {
 }
 form .submit-button {
   margin-top: 20px;
+}
+form p {
+  border: 1px solid lightgrey;
+  margin: 0;
+  display: inline-block;
+  padding: 2px;
+  width: 250px;
+  border-radius: 4px;
+}
+.pagination-container {
+  margin-top: 20px;
+  width: 100%;
+}
+.pagination-container ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.pagination-container ul:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+.pagination-container ul li {
+  list-style-type: none;
+  display: inline-block;
+  margin: 0 10px;
+}
+.pagination-container ul li a,
+.pagination-container ul li span {
+  text-decoration: none;
+  color: #1996e8;
+  display: block;
+  padding: 2px;
+}
+.pagination-container ul li a:hover,
+.pagination-container ul li span:hover {
+  text-decoration: underline;
+}
+.pagination-container ul li.active span,
+.pagination-container ul li.disabled span {
+  color: #5d5d55;
+}
+.export {
+  margin-left: 20px;
+}
+.export a {
+  display: block;
+  text-decoration: none;
+  color: #1996e8;
+}
+.export a:hover {
+  text-decoration: underline;
 }

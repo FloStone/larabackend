@@ -3,6 +3,8 @@
 namespace Flo\Backend\Controllers;
 
 use Input;
+use Session;
+use Request;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -32,6 +34,28 @@ class AdminController extends BaseController implements AdminInterface
 	public static $displayed_actions = [];
 
 	/**
+	 * Redirect session initialization
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$uri = implode('/', Request::segments());
+
+		if ($uri != Session::get('current_page'))
+		{
+			if (Session::has('current_page'))
+			{
+				if (Request::method() == "POST");
+				else
+					Session::put('last_page', Session::get('current_page'));
+			}
+
+			Session::put('current_page', $uri);
+		}
+	}
+
+	/**
 	 * Returns the view given
 	 *
 	 * @param string $model
@@ -42,7 +66,7 @@ class AdminController extends BaseController implements AdminInterface
 	{
 		if (class_exists($model))
 		{
-			return new View(static::$displayed_actions, $model, Input::has('search') ? Input::get('search') : null, $pagination);
+			return new View(static::$displayed_actions, $model, $this->getChildClass(), Input::has('search') ? Input::get('search') : null, $pagination);
 		}
 		else
 		{
@@ -67,7 +91,7 @@ class AdminController extends BaseController implements AdminInterface
 		// Convert model string back to readable
 		$model = class_replace($model);
 		
-		return (new View(static::$displayed_actions, $model))->addForm(EDIT, $id)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(EDIT, $id)->render();
 	}
 
 	/**
@@ -80,7 +104,7 @@ class AdminController extends BaseController implements AdminInterface
 	{
 		$model = class_replace($model);
 
-		return (new View(static::$displayed_actions, $model))->addForm(ADD)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(ADD)->render();
 	}
 
 	/**
@@ -94,7 +118,7 @@ class AdminController extends BaseController implements AdminInterface
 	{
 		$model = class_replace($model);
 
-		return (new View(static::$displayed_actions, $model))->addForm(DELETE, $id)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(DELETE, $id)->render();
 	}
 
 	/**
@@ -110,13 +134,23 @@ class AdminController extends BaseController implements AdminInterface
 		$model = class_replace($model);
 
 		$class = $model::find($id);
-		foreach(array_keys($model::$editable_columns) as $column)
+		foreach($model::$editable_columns as $column => $properties)
 		{
-			$class->$column = Input::get($column);
+			if (isset($properties['type']) && $properties['type'] == 'checkbox')
+			{
+				if (Input::get($column))
+					$class->$column = true;
+				else
+					$class->$column = false;
+			}
+			else
+			{
+				$class->$column = Input::get($column);
+			}
 		}
 		$class->save();
 
-		return redirect('admin');
+		return redirect(Session::get('last_page'));
 	}
 
 	/**
@@ -132,14 +166,14 @@ class AdminController extends BaseController implements AdminInterface
 
 		$class = new $model;
 
-		foreach(array_keys($model::$editable_columns) as $column)
+		foreach($model::$editable_columns as $column => $properties)
 		{
 			$class->$column = Input::get($column);
 		}
 
 		$class->save();
 
-		return redirect('admin');
+		return redirect(Session::get('last_page'));
 	}
 
 	/**
@@ -156,7 +190,7 @@ class AdminController extends BaseController implements AdminInterface
 
 		$model::find($id)->delete();
 
-		return redirect('admin');
+		return redirect(Session::get('last_page'));
 	}
 
 	/**
@@ -169,5 +203,10 @@ class AdminController extends BaseController implements AdminInterface
 	public function getExport($model, $type)
 	{
 		return new ExcelDocument($model, $type);
+	}
+
+	public function getChildClass()
+	{
+		return str_replace('App\Http\Controllers\\', '', get_called_class());
 	}
 }
