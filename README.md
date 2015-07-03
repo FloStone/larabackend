@@ -60,7 +60,13 @@ and add the controller to your `routes.php` using
 
 `Route::controller('admin', 'YourController')`
 
-Remember to protected the controller with a middleware
+Remember to protected the controller with a middleware but when you do that
+You need to call the parent constructor as well
+
+`public function __constrcut() {`<br>
+`parent::__construct();`<br>
+``$this->middleware('admin);`
+`}`
 
 First you need to tell the Backend what controller methods should be displayed in the menu
 A key indicates the name isplayed in the menu, the value tells the controller method
