@@ -35,6 +35,14 @@ Laravel 5.1:
 
 `'Excel' => Maatwebsite\Excel\Facades\Excel::class`
 
+Add this to Kernel.php in App\Console:
+
+`'\Flo\Backend\Commands\AdminInstallation'`
+
+Laravel 5.1:
+
+`\Flo\Backend\Commands\AdminInstallation::class`
+
 Execute:
 
 `php artisan admin:install`
