@@ -4,7 +4,7 @@
 
 ###Add packages to composer.json:
 
-"flo5581/larahelpers" : "1.0.x-dev"
+"flo5581/larahelpers" : "1.0.x-dev"<br>
 "flo5581/larabackend" : "dev-master"
 
 Add to Kernel.php in App\Console:
