@@ -14,8 +14,10 @@
 				@endif
 				@endforeach
 				@if($data['editable'])
+				@if($data['data']->first())
 				<th>Edit</th>
 				<th>Delete</th>
+				@endif
 				@endif
 			</tr>
 		</thead>
@@ -29,8 +31,8 @@
 				@foreach($data['data']->first()->getOriginal() as $item)
 				<td></td>	
 				@endforeach
-				@endif
 				<td></td>
+				@endif
 			</tr>
 			@endif
 			@if($data['data']->first())
