@@ -5,6 +5,13 @@ namespace Flo\Backend\Classes;
 interface AdminInterface
 {
 	/**
+	 * Return the index page
+	 *
+	 * @return view
+	 */
+	public function getIndex();
+
+	/**
 	 * Edit an instance of a Model
 	 *
 	 * @param int $id

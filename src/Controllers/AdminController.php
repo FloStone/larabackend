@@ -22,7 +22,7 @@ use Flo\Backend\Classes\ExcelDocument;
  * @author  Flo5581
  * @package  Flo\Backend
  */
-class AdminController extends BaseController implements AdminInterface
+abstract class AdminController extends BaseController implements AdminInterface
 {
 	use DispatchesJobs, ValidatesRequests;
 
