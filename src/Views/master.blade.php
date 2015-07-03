@@ -21,6 +21,7 @@
 		@endif
 		@endforeach
 		@endif
+		@yield('content')
 	</body>
 
 </html>
