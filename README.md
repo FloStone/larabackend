@@ -65,7 +65,7 @@ You need to call the parent constructor as well
 
 `public function __constrcut() {`<br>
 `parent::__construct();`<br>
-``$this->middleware('admin);`
+``$this->middleware('admin);`<br>
 `}`
 
 First you need to tell the Backend what controller methods should be displayed in the menu
