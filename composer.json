@@ -20,6 +20,6 @@
         "maatwebsite/excel": "~2.0.0"
     },
     "require-dev": {
-        "flo5581/larahelpers": "1.0.x-dev"
+        "flo5581/larahelpers": "dev-master"
     }
 }
