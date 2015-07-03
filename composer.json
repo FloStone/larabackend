@@ -17,7 +17,7 @@
     	]
     },
     "require": {
-        "flo5581/larahelpers": "*",
+        "flo5581/larahelpers": "1.0.x-dev",
         "maatwebsite/excel": "~2.0.0"
     }
 }
