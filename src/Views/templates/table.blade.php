@@ -1,3 +1,5 @@
+@use(Illuminate\Database\Eloquent\Model)
+@use(Illuminate\Database\Eloquent\Collection)
 @define($model = $data['model'])
 <div class="table">
 	<table>
@@ -25,7 +27,7 @@
 			@if($data['editable'])
 			<tr>
 				<td>
-					<a href="{{action('AdminController@getAdd', ['model' => class_replace($model)])}}">Add</a>
+					<a href="{{action($controller.'@getAdd', ['model' => class_replace($model)])}}">Add</a>
 				</td>
 				@if($data['data']->first())
 				@foreach($data['data']->first()->getOriginal() as $item)
@@ -38,12 +40,25 @@
 			@if($data['data']->first())
 			@foreach($data['data'] as $item)
 			<tr>
-				@foreach($item->getOriginal() as $attr)
-				<td>{{$attr}}</td>
+				@foreach($model::$displayed_columns as $column => $properties)
+				@if($properties['relation'])
+					@define($relation = $item->$properties['relation']['method'])
+					@if($relation instanceof Collection)
+					<td>
+					@foreach($relation as $related)
+					{{$related->toArray()[$properties['relation']['display']]}}
+					@endforeach
+					</td>
+					@else
+					{{$relation->toArray()[$properties['relation']['display']]}}
+					@endif
+				@else
+				<td>{{$item->$column}}</td>
+				@endif
 				@endforeach
 				@if($data['editable'])
-				<td><a href="{{action('AdminController@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}">Edit</a></td>
-				<td><a href="{{action('AdminController@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}">Delete</a></td>
+				<td><a href="{{action($controller.'@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}">Edit</a></td>
+				<td><a href="{{action($controller.'@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}">Delete</a></td>
 				@endif
 			</tr>
 			@endforeach
