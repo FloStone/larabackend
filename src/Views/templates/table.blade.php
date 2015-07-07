@@ -40,8 +40,9 @@
 			@if($data['data']->first())
 			@foreach($data['data'] as $item)
 			<tr>
+				<td>{{$item->id}}</td>
 				@foreach($model::$displayed_columns as $column => $properties)
-				@if($properties['relation'])
+				@if(isset($properties['relation']))
 					@define($relation = $item->$properties['relation']['method'])
 					@if($relation instanceof Collection)
 					<td>

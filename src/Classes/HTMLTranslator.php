@@ -23,13 +23,13 @@ class HTMLTranslator
 	{
 		if ($type == 'textarea')
 		{
-			return "<textarea>$data</textarea>"
+			return "<textarea>$data</textarea>";
 		}
 		else
 		{
 			$trans = static::$types[$type ?: 'string'];
 
-			return "<input type=\"$trans\" name=\"$name\" value=\"$data\">"
+			return "<input type=\"$trans\" name=\"$name\" value=\"$data\">";
 		}
 	}
 }
