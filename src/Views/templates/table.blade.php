@@ -30,9 +30,10 @@
 					<a href="{{action($controller.'@getAdd', ['model' => class_replace($model)])}}">Add</a>
 				</td>
 				@if($data['data']->first())
-				@foreach($data['data']->first()->getOriginal() as $item)
+				@foreach($model::$displayed_columns as $item)
 				<td></td>	
 				@endforeach
+				<td></td>
 				<td></td>
 				@endif
 			</tr>

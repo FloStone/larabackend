@@ -40,7 +40,7 @@ nav ul li a {
   display: block;
   text-decoration: none;
   color: #e6e6e6;
-  padding: 8px 10px;
+  padding: 9px 10px;
   height: 40px;
 }
 nav ul li a.active {
@@ -49,11 +49,18 @@ nav ul li a.active {
 nav input {
   position: absolute;
   top: 8px;
-  right: 60px;
+  right: 90px;
   border: 0;
   height: 24px;
   border-radius: 2px;
   padding: 2px 5px;
+}
+nav .logout a {
+  color: #e6e6e6;
+  position: absolute;
+  top: 9px;
+  right: 20px;
+  text-decoration: none;
 }
 .table {
   width: 100%;

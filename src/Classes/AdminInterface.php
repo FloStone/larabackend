@@ -74,4 +74,11 @@ interface AdminInterface
 	 * @return ExcelDocument
 	 */
 	public function getExport($model, $type);
+
+	/**
+	 * Log current user out of backend
+	 *
+	 * @return Response
+	 */
+	public function getLogout();
 }

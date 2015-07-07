@@ -21,6 +21,13 @@ class ViewFactory
 	private $fields;
 
 	/**
+	 * Instance of Worker
+	 *
+	 * @var Flo\Backend\Worker
+	 */
+	private $worker;
+
+	/**
 	 * Actions displayed in menu
 	 *
 	 * @var array
@@ -48,26 +55,29 @@ class ViewFactory
 	 */
 	public function __construct(array $actions, $model, $controller, $search = null, $pagination = null)
 	{
+		$this->worker = new Worker($model);
 		$this->actions = $actions;
 		$this->fields = [];
 		$this->model = $model;
 		$this->controller = $controller;
 
+		$displayed_columns = $this->worker->checkColumnsForRelation();
+
 		// Model Initiation
-		if (isset($model::$displayed_columns['id']))
+		if (isset($displayed_columns['id']))
 		{
-			$cols = array_keys($model::$displayed_columns);	
+			$cols = array_keys($displayed_columns);
 		}
 		else
 		{
-			$cols = array_merge(['id'], array_keys($model::$displayed_columns));
+			$cols = array_merge(['id'], array_keys($displayed_columns));
 		}
 
 		if (!is_null($cols) && !empty($cols))
 		{
 			if ($search)
 			{
-				$this->data = $model::select($cols)->whereRaw($this->getSearchQuery($search))->paginate($pagination);
+				$this->data = $model::select($cols)->whereRaw($this->worker->getSearchQuery($search))->paginate($pagination);
 			}
 			else
 			{
@@ -152,33 +162,5 @@ class ViewFactory
 	public function render()
 	{
 		return view('Backend::master', ['fields' => $this->fields, 'actions' => $this->actions, 'controller' => $this->controller]);
-	}
-
-	/**
-	 * Generates a query to use search using $searchable_fields
-	 *
-	 * @return string
-	 */
-	private function getSearchQuery($search)
-	{
-		$model = $this->model;
-		$columns = $model::$searchable_columns;
-
-		$query = '';
-		$i = 1;
-		$count = (int)count($columns);
-
-		foreach($columns as $field)
-		{
-			$query = $query . "`$field` like '%$search%' ";
-
-			if ($i < $count)
-			{
-				$query = $query . 'OR ';
-				$i++;
-			}
-		}
-
-		return $query;
 	}
 }

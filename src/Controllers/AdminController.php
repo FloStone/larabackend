@@ -76,7 +76,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 
 	public function customView($path, array $data = [])
 	{
-		return view($path, $data)->with('actions', static::$displayed_actions);
+		return view($path, $data)->with('actions', static::$displayed_actions)->with('controller', $this->getChildClass());
 	}
 
 	/**
@@ -205,8 +205,20 @@ abstract class AdminController extends BaseController implements AdminInterface
 		return new ExcelDocument($model, $type);
 	}
 
+	/**
+	 * Get the child controller class
+	 *
+	 * @return string
+	 */
 	public function getChildClass()
 	{
 		return str_replace('App\Http\Controllers\\', '', get_called_class());
+	}
+
+	public function getLogout()
+	{
+		\Auth::logout();
+
+		return redirect('/');
 	}
 }
