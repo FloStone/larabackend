@@ -1,4 +1,3 @@
-@use(Illuminate\Database\Eloquent\Model)
 @use(Illuminate\Database\Eloquent\Collection)
 @define($model = $data['model'])
 <div class="table">
@@ -48,11 +47,11 @@
 					@if($relation instanceof Collection)
 					<td>
 					@foreach($relation as $related)
-					{{$related->toArray()[$properties['relation']['display']]}}
+					{{$related->toArray()[$properties['relation']['display']]}}<br>
 					@endforeach
 					</td>
 					@else
-					{{$relation->toArray()[$properties['relation']['display']]}}
+					{{$relation->toArray()[$properties['relation']['display']]}}<br>
 					@endif
 				@else
 				<td>{{$item->$column}}</td>
