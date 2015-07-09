@@ -181,7 +181,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 		}
 
 		$class->save();
-
+		
 		return redirect(Session::get('last_page'));
 	}
 
