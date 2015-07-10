@@ -23,7 +23,7 @@ class HTMLTranslator
 	{
 		if ($type == 'textarea')
 		{
-			return "<textarea>$data</textarea>";
+			return "<textarea name=\"$name\">$data</textarea>";
 		}
 		else
 		{

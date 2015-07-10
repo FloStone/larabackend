@@ -6,7 +6,7 @@
 		<label for="{{$column}}">{{isset($properties['label']) ? $properties['label'] : $column}}</label>
 		@if(isset($properties['relation']))
 		@else
-		{!! HTMLTranslator::make($properties['type'] ?: null, $column) !!}
+		{!! HTMLTranslator::make(isset($properties['type']) ? $properties['type'] : null, $column) !!}
 		@endif
 	</div>
 	@endforeach
