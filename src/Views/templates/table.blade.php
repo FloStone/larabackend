@@ -16,8 +16,8 @@
 				@endforeach
 				@if($data['editable'])
 				@if($data['data']->first())
-				<th>Edit</th>
-				<th>Delete</th>
+				<th class="editable">Edit</th>
+				<th class="editable">Delete</th>
 				@endif
 				@endif
 			</tr>
@@ -58,8 +58,8 @@
 				@endif
 				@endforeach
 				@if($data['editable'])
-				<td><a href="{{action($controller.'@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}">Edit</a></td>
-				<td><a href="{{action($controller.'@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}">Delete</a></td>
+				<td class="editable"><a href="{{action($controller.'@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}">Edit</a></td>
+				<td class="editable"><a href="{{action($controller.'@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}">Delete</a></td>
 				@endif
 			</tr>
 			@endforeach

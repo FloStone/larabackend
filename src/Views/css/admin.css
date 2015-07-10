@@ -79,6 +79,13 @@ nav .logout a {
 .table table thead tr th {
   padding: 4px;
   font-weight: bold;
+  min-width: 150px;
+}
+.table table thead tr th:first-child {
+  min-width: 40px;
+}
+.table table thead tr th.editable {
+  min-width: 60px;
 }
 .table table tbody tr {
   border-bottom: 1px solid lightgrey;
