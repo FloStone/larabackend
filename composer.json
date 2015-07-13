@@ -17,9 +17,7 @@
     	]
     },
     "require": {
-        "maatwebsite/excel": "~2.0.0"
-    },
-    "require-dev": {
-        "flo5581/larahelpers": "dev-master"
+        "maatwebsite/excel": "~2.0.0",
+        "flo5581/larahelpers": "1.0.0"
     }
 }
