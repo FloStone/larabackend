@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Flo\Backend\Classes\EditableColumnsException;
 
+use Request;
+
 /**
  * Class ViewFactory creates Admin Views with fields defined
  *
@@ -77,11 +79,11 @@ class ViewFactory
 		{
 			if ($search)
 			{
-				$this->data = $model::select($cols)->whereRaw($this->worker->getSearchQuery($search))->paginate($pagination);
+				$this->data = $model::select($cols)->whereRaw($this->worker->getSearchQuery($search))->orderBy(Request::input('order', 'id'), Request::input('destination', 'asc'))->paginate($pagination);
 			}
 			else
 			{
-				$this->data = $model::select($cols)->paginate($pagination);
+				$this->data = $model::select($cols)->orderBy(Request::input('order', 'id'), Request::input('destination', 'asc'))->paginate($pagination);
 			}
 		}
 		else

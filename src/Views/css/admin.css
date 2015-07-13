@@ -87,6 +87,13 @@ nav .logout a {
 .table table thead tr th.editable {
   min-width: 60px;
 }
+.table table thead tr th a {
+  color: black;
+  text-decoration: none;
+}
+.table table thead tr th a:hover {
+  text-decoration: underline;
+}
 .table table tbody tr {
   border-bottom: 1px solid lightgrey;
 }

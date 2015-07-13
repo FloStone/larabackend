@@ -9,9 +9,18 @@
 				@endif
 				@foreach($model::$displayed_columns as $head => $properties)
 				@if(isset($properties['label']))
+				@define($dest = Request::input('destination') ? Request::input('destination') == 'asc' ? 'desc' : 'asc' : 'asc')
+				@if(isset($properties['relation']))
 				<th>{{$properties['label']}}</th>
 				@else
+				<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.$dest}}">{{$properties['label']}}</a></th>
+				@endif
+				@else
+				@if(isset($properties['relation']))
 				<th>{{$head}}</th>
+				@else
+				<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.$dest}}">{{$head}}</a></th>
+				@endif
 				@endif
 				@endforeach
 				@if($data['editable'])
