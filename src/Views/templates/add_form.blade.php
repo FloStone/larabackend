@@ -1,6 +1,6 @@
 @use(Flo\Backend\Classes\HTMLTranslator)
 <div class="form">
-	<form method="post" action="{{action($controller.'@postAdd', ['model' => class_replace($data['model'])])}}">
+	<form method="post" action="{{action($controller.'@postAdd', ['model' => class_replace($data['model'])])}}" enctype="multipart/form-data">
 	@foreach($data['formfields'] as $column => $properties)
 	<div class="formfields">
 		<label for="{{$column}}">{{isset($properties['label']) ? $properties['label'] : $column}}</label>

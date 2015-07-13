@@ -143,21 +143,8 @@ abstract class AdminController extends BaseController implements AdminInterface
 		$model = class_replace($model);
 
 		$class = $model::find($id);
-		foreach($model::$editable_columns as $column => $properties)
-		{
-			if (isset($properties['type']) && $properties['type'] == 'checkbox')
-			{
-				if (Input::get($column))
-					$class->$column = true;
-				else
-					$class->$column = false;
-			}
-			else
-			{
-				$class->$column = Input::get($column);
-			}
-		}
-		$class->save();
+
+		$this->workOnModel($class, $model);
 
 		return redirect(Session::get('last_page'));
 	}
@@ -175,12 +162,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 
 		$class = new $model;
 
-		foreach($model::$editable_columns as $column => $properties)
-		{
-			$class->$column = Input::get($column);
-		}
-
-		$class->save();
+		$this->workOnModel($class, $model);
 		
 		return redirect(Session::get('last_page'));
 	}
@@ -200,6 +182,32 @@ abstract class AdminController extends BaseController implements AdminInterface
 		$model::find($id)->delete();
 
 		return redirect(Session::get('last_page'));
+	}
+
+	/**
+	 * Work on Model
+	 *
+	 * @param Model $class
+	 * @param string $model
+	 * @return void
+	 */
+	public function workOnModel(Model $class, $model)
+	{
+		foreach($model::$editable_columns as $column => $properties)
+		{
+			if (isset($properties['type']) && $properties['type'] == 'checkbox')
+			{
+				if (Input::get($column))
+					$class->$column = true;
+				else
+					$class->$column = false;
+			}
+			else
+			{
+				$class->$column = Input::get($column);
+			}
+		}
+		$class->save();
 	}
 
 	/**

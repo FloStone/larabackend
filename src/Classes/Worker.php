@@ -73,4 +73,18 @@ class Worker
 
 		return $array;
 	}
+
+	public static function getClassMethods($class)
+	{
+		$methods = [];
+		$reflection = new \ReflectionClass($class);
+
+		foreach($reflection->getMethods() as $m)
+		{
+			if ($m->class == $class)
+				$methods[] = $m->name;
+		}
+
+		return $methods;
+	}
 }

@@ -1,7 +1,7 @@
 @use(Flo\Backend\Classes\HTMLTranslator)
 @define($model = get_class($data['model']))
 <div class="form">
-	<form method="post" action="{{action($controller.'@postEdit', ['id' => $data['model']->id, 'model' => class_replace(get_class($data['model']))])}}">
+	<form method="post" action="{{action($controller.'@postEdit', ['id' => $data['model']->id, 'model' => class_replace(get_class($data['model']))])}}" enctype="multipart/form-data">
 	@foreach($model::$editable_columns as $column => $properties)
 	<div class="formfield">
 		<label for="{{$column}}">{{isset($properties['label']) ? $properties['label'] : $column}}</label>
