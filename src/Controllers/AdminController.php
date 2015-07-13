@@ -16,6 +16,7 @@ namespace Flo\Backend\Controllers;
 use Input;
 use Session;
 use Request;
+use File;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -203,6 +204,14 @@ abstract class AdminController extends BaseController implements AdminInterface
 					$class->$column = true;
 				else
 					$class->$column = false;
+			}
+			elseif (isset($properties['type']) && $properties['type'] == 'file')
+			{
+				$file = Input::file($column);
+				$filename = $file->getClientOriginalName().str_random(5);
+				$file->move(public_path('uploads/files/'), $filename);
+
+				$class->$column = "uploads/files/$filename";
 			}
 			else
 			{

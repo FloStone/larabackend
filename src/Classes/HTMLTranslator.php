@@ -16,7 +16,8 @@ class HTMLTranslator
 		'boolean'	=> 'checkbox',
 		'select'	=> 'select',
 		'selectbox'	=> 'select',
-		'enum'		=> 'select'
+		'enum'		=> 'select',
+		'file'		=> 'file'
 	];
 
 	public static function make($type = null, $name, $data = null)
