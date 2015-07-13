@@ -12,6 +12,7 @@ use Request;
  * Class ViewFactory creates Admin Views with fields defined
  *
  * @package  Flo\Backend
+ * @author  Flo5581
  */
 class ViewFactory
 {
