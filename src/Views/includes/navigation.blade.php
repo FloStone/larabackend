@@ -9,7 +9,7 @@
 	</ul>
 	@if(isset($active))
 	<form method="get" action="{{action($controller.'@'.$active)}}">
-		<input type="search" name="search" placeholder="Search...">
+		<input type="search" name="search" placeholder="Search..." value="{{Request::input('search') ?: ''}}">
 	</form>
 	<div class="logout">
 		<a href="{{action($controller.'@getLogout')}}">
