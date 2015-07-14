@@ -3,6 +3,7 @@
 namespace Flo\Backend\Classes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Flo\Backend\Classes\EditableColumnsException;
 
@@ -16,6 +17,8 @@ use Request;
  */
 class ViewFactory
 {
+	use \Flo\Backend\Traits\QueryTrait;
+
 	/**
 	 * Fields returned in view
 	 *
@@ -52,6 +55,29 @@ class ViewFactory
 	private $controller;
 
 	/**
+	 * Input from search field
+	 *
+	 * @var string
+	 */
+	private $search;
+
+	/**
+	 * Amount of items per page
+	 * Default is 20
+	 *
+	 * @see Flo\Backend\AdminController@view
+	 * @var int
+	 */
+	private $pagination;
+
+	/**
+	 * Indicates if the data query has been resolved
+	 *
+	 * @var bool
+	 */
+	private $resolved = false;
+
+	/**
 	 * Basic construction
 	 *
 	 * @return void
@@ -63,6 +89,8 @@ class ViewFactory
 		$this->fields = [];
 		$this->model = $model;
 		$this->controller = $controller;
+		$this->search = $search;
+		$this->pagination = $pagination;
 
 		$displayed_columns = $this->worker->checkColumnsForRelation();
 
@@ -78,14 +106,7 @@ class ViewFactory
 
 		if (!is_null($cols) && !empty($cols))
 		{
-			if ($search)
-			{
-				$this->data = $model::select($cols)->whereRaw($this->worker->getSearchQuery($search))->orderBy(Request::input('order', 'id'), Request::input('destination', 'asc'))->paginate($pagination);
-			}
-			else
-			{
-				$this->data = $model::select($cols)->orderBy(Request::input('order', 'id'), Request::input('destination', 'asc'))->paginate($pagination);
-			}
+			$this->data = $model::select($cols);
 		}
 		else
 		{
@@ -98,7 +119,7 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addTable(Collection $custom_data = null, $editable = true)
+	private function addTable(Collection $custom_data = null, $editable = true)
 	{
 		$this->fields[] = ['table' => ['data' => $custom_data ?: $this->data, 'editable' => $editable ? true : false, 'model' => $this->model]];
 
@@ -110,7 +131,7 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addCustom($template, $data = null)
+	private function addCustom($template, $data = null)
 	{
 		$this->fields[] = ['custom' => $template, 'data' => $data ?: $this->data];
 
@@ -122,7 +143,7 @@ class ViewFactory
 	 *
 	 * @return this
 	 */
-	public function addForm($type, $id = null, Collection $custom_data = null)
+	private function addForm($type, $id = null, Collection $custom_data = null)
 	{
 		$model = $this->model;
 
@@ -148,13 +169,44 @@ class ViewFactory
 		return $this;
 	}
 
-	public function addExport($type, Collection $custom_data = null)
+	/**
+	 * Add an export field to the view
+	 *
+	 * @param string $type fileextension
+	 * @param Collection $custom_data
+	 * @return this
+	 */
+	private function addExport($type, Collection $custom_data = null)
 	{
 		$model = $this->model;
 
 		$this->fields[] = ['export' => [$custom_data ?: $model, 'type' => $type]];
 
 		return $this;
+	}
+
+	/**
+	 * Call all the private methods but execute query cconditions first
+	 *
+	 * @param string $method
+	 * @param array $arguments
+	 * @return method
+	 */
+	public function __call($method, $arguments)
+	{
+		if (method_exists($this, $method))
+		{
+			if (!$this->resolved)
+			{
+				if ($this->data instanceof EloquentCollection === false)
+				{
+					$this->data = $this->resolveQuery();
+					$this->resolved = true;
+				}
+			}
+			
+			return call_user_func_array([$this, $method], $arguments);
+		}
 	}
 
 	/**

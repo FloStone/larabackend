@@ -42,3 +42,17 @@ if (!function_exists('class_replace'))
 			return $string;
 	}
 }
+
+if (!function_exists('delete_first_word'))
+{
+	function delete_first_word($string)
+	{
+		$array = explode(' ', $string);
+
+		array_shift($array);
+
+		$string = implode(' ', $array);
+
+		return $string;
+	}
+}
