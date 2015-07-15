@@ -28,6 +28,7 @@ use Flo\Backend\Classes\ModelNotFoundException;
 use Flo\Backend\Classes\ViewFactory as View;
 use Flo\Backend\Classes\AdminInterface;
 use Flo\Backend\Classes\ExcelDocument;
+use Flo\Backend\Classes\HTMLTranslator;
 
 /**
  * AdminController for Backend
@@ -81,7 +82,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	{
 		if (class_exists($model))
 		{
-			return new View(static::$displayed_actions, $model, $this->getChildClass(), Input::has('search') ? Input::get('search') : null, $pagination);
+			return new View(static::$displayed_actions, $model, $this->getChildController(), Input::has('search') ? Input::get('search') : null, $pagination);
 		}
 		else
 		{
@@ -91,7 +92,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 
 	public function customView($path, array $data = [])
 	{
-		return view($path, $data)->with('actions', static::$displayed_actions)->with('controller', $this->getChildClass());
+		return view($path, $data)->with('actions', static::$displayed_actions)->with('controller', $this->getChildController());
 	}
 
 	/**
@@ -117,7 +118,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 		// Convert model string back to readable
 		$model = class_replace($model);
 		
-		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(EDIT, $id)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildController()))->addForm(EDIT, $id)->render();
 	}
 
 	/**
@@ -130,7 +131,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	{
 		$model = class_replace($model);
 
-		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(ADD)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildController()))->addForm(ADD)->render();
 	}
 
 	/**
@@ -144,7 +145,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	{
 		$model = class_replace($model);
 
-		return (new View(static::$displayed_actions, $model, $this->getChildClass()))->addForm(DELETE, $id)->render();
+		return (new View(static::$displayed_actions, $model, $this->getChildController()))->addForm(DELETE, $id)->render();
 	}
 
 	/**
@@ -219,7 +220,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 				else
 					$class->$column = false;
 			}
-			elseif (isset($properties['type']) && $properties['type'] == 'file')
+			elseif (isset($properties['type']) && HTMLTranslator::type($properties['type']) == 'file')
 			{
 				$file = Input::file($column);
 				$filename = $file->getClientOriginalName().str_random(5);
@@ -252,7 +253,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	 *
 	 * @return string
 	 */
-	public function getChildClass()
+	public function getChildController()
 	{
 		return str_replace('App\Http\Controllers\\', '', get_called_class());
 	}

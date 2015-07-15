@@ -110,6 +110,9 @@ nav .logout a {
 .table table tbody tr td a:hover {
   text-decoration: underline;
 }
+.table table tbody tr td img {
+  max-height: 80px;
+}
 form {
   margin: 20px;
 }

@@ -56,4 +56,15 @@ class HTMLTranslator
 			return "<input type=\"$trans\" name=\"$name\" value=\"$data\">";
 		}
 	}
+
+	/**
+	 * Return only the type without html
+	 *
+	 * @param string $key
+	 * @return string
+	 */
+	public static function type($key)
+	{
+		return static::$types[$key];
+	}
 }
