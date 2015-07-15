@@ -4,23 +4,13 @@
 
 ###Add packages to composer.json:
 
-"flo5581/larahelpers" : "1.0.0"
+"flo5581/larahelpers" : "1.0.*"
 
 Add to Kernel.php in App\Console:
-
-`'\Flo\Backend\Commands\AdminInstallation'`
-
-Laravel 5.1:
 
 `\Flo\Backend\Commands\AdminInstallation::class`
 
 ###Register Service Provider:
-
-`'Flo\Backend\BackendProvider'`<br>
-`'Flo5581\Larahelpers\BladeExtensions'`<br>
-`'Maatwebsite\Excel\ExcelServiceProvider'`<br>
-
-Laravel 5.1:
 
 `Flo\Backend\BackendProvider::class`<br>
 `Flo5581\Larahelpers\BladeExtensions::class`<br>
@@ -28,27 +18,17 @@ Laravel 5.1:
 
 ###Add Facades
 
-`'Excel' => 'Maatwebsite\Excel\Facades\Excel'`
-
-Laravel 5.1:
-
 `'Excel' => Maatwebsite\Excel\Facades\Excel::class`
-
-Add this to Kernel.php in App\Console:
-
-`'\Flo\Backend\Commands\AdminInstallation'`
-
-Laravel 5.1:
-
-`\Flo\Backend\Commands\AdminInstallation::class`
 
 Execute:
 
 `php artisan admin:install`
 
-Make sure your admin templates extend `Backend::master`
+This will work with Laravel 5.0.* however you need to use strings instead of ::class<br>
+Example:<br>
+`'\Flo\Backend\Commands\AdminInstallation'`
 
-##Usage
+##Basic Usage
 
 Before you do anything:
 Create a controller that extends
@@ -59,6 +39,10 @@ and add the controller to your `routes.php` using
 
 `Route::controller('admin', 'YourController')`
 
+or
+
+`controller('admin', 'YourController')`
+
 Remember to protected the controller with a middleware but when you do that
 You need to call the parent constructor as well
 
@@ -68,7 +52,7 @@ You need to call the parent constructor as well
 `}`
 
 First you need to tell the Backend what controller methods should be displayed in the menu
-A key indicates the name isplayed in the menu, the value tells the controller method
+A key indicates the name displayed in the menu, the value tells the controller method
 
 `public static $displayed_actions = ['Index' => 'getIndex']`
 
@@ -80,11 +64,6 @@ just pass through the model you wish to use.
 `{`<br>
 	`$this->view(Model::class);`<br>
 `}`
-
-Remember that in Laravel 5.1 you can use `::class` to indicate the class you want
-to pass through. You can also use a string if you wish
-
-`$this->view('App\Models\MyModel')`
 
 To add parts to the view like a table where the content should be displayed
 you need to use the addTable method
@@ -100,7 +79,7 @@ the second parameter, the default value is true
 
 Finally call the render method to make everything work
 
-`$this->view(Model::class)->addTable($custom_data, true)->render()`
+`$this->view(Model::class)->addTable()->render()`
 
 To define which columns of your model should be displayed inside the table
 you have to add
@@ -119,8 +98,59 @@ as headline in the table
 
 Keep in mind that not having this variable or having it empty will cause an error
 
-
 Add an export field by using addExport as method
 Pass through the filetype as first parameter
 
-`$this->view(Model::class)->addTable($custom_data, true)->addExport('xls')->render()`
+`$this->view(Model::class)->addTable()->addExport('xls')->render()`
+
+##Model Definitions
+
+Here is a list of all Model definitions and what they do:
+
+###1
+
+`public static $display_columns = ['column' => [(options)]]`<br>
+Field MUST be set!<br>
+An array of all displayed columns in the backend table<br>
+Options:<br>
+`'label' => 'Name of Column'`<br>
+`'relation' => [(properties)]`<br>
+Relation Properties:<br>
+`'method' => 'nameofrelationmethod'`<br>
+`'display' => 'displayedfieldofrelatedobject'`
+
+###2
+
+`public static $editable_columns = ['column' => [(options)]]`<br>
+Field MUST be set!<br>
+An array of columns that should be editable<br>
+Options:<br>
+`'label' => 'Name of Column'`<br>
+`'type' => 'Type of Field'`<br>
+List of field types:<br>
+`'string'`<br>
+`'text'`<br>
+`'textarea'`<br>
+`'integer'`<br>
+`'int'`<br>
+`'password'`<br>
+`'pass'`<br>
+`'checkbox'`<br>
+`'boolean'`<br>
+`'select'`<br>
+`'selectbox'`<br>
+`'enum'`<br>
+`'file'`<br>
+`'image'`<br>
+
+###3
+
+`public static $export_fields = ['column' => [(options)]]`<br>
+Field CAN be set<br>
+An array of fields that should be exported, exports all columns AND relations by default<br>
+Options:<br>
+`'label' => 'Name of Column'`<br>
+`'relation' => [(properties)]`<br>
+Relation Properties:<br>
+`'method' => 'nameofrelationmethod'`<br>
+`'display' => 'displayedfieldofrelatedobject'`

@@ -17,6 +17,7 @@ use Input;
 use Session;
 use Request;
 use File;
+use Auth;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -91,6 +92,17 @@ abstract class AdminController extends BaseController implements AdminInterface
 	public function customView($path, array $data = [])
 	{
 		return view($path, $data)->with('actions', static::$displayed_actions)->with('controller', $this->getChildClass());
+	}
+
+	/**
+	 * Show the index page
+	 * Default is example page
+	 *
+	 * @return view
+	 */
+	public function getIndex()
+	{
+		return view('Backend::templates.index');
 	}
 
 	/**
@@ -245,9 +257,14 @@ abstract class AdminController extends BaseController implements AdminInterface
 		return str_replace('App\Http\Controllers\\', '', get_called_class());
 	}
 
+	/**
+	 * Logout the current user
+	 *
+	 * @return Response
+	 */
 	public function getLogout()
 	{
-		\Auth::logout();
+		Auth::logout();
 
 		return redirect('/');
 	}

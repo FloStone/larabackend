@@ -63,6 +63,12 @@ trait Worker
 		return $array;
 	}
 
+	/**
+	 * Get all methods of a class without gettig the methods of the parent class
+	 *
+	 * @param string $class
+	 * @return array
+	 */
 	public function getClassMethods($class)
 	{
 		$methods = [];

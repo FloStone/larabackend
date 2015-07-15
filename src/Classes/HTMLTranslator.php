@@ -2,8 +2,22 @@
 
 namespace Flo\Backend\Classes;
 
+/**
+ * Class HTMLTranslator converts fields defined in Model
+ * To working html inputs
+ *
+ * @package Flo\Backend
+ * @author Flo5581
+ */
 class HTMLTranslator
 {
+	/**
+	 * Dictionary of field types
+	 * Key is the model field
+	 * Value is the html input type
+	 *
+	 * @var array
+	 */
 	public static $types = [
 		'string'	=> 'text',
 		'text'		=> 'text',
@@ -17,9 +31,18 @@ class HTMLTranslator
 		'select'	=> 'select',
 		'selectbox'	=> 'select',
 		'enum'		=> 'select',
-		'file'		=> 'file'
+		'file'		=> 'file',
+		'image'		=> 'file'
 	];
 
+	/**
+	 * Run the dictionary
+	 *
+	 * @param string $type
+	 * @param string $name
+	 * @param string $data
+	 * @return html
+	 */
 	public static function make($type = null, $name, $data = null)
 	{
 		if ($type == 'textarea')
