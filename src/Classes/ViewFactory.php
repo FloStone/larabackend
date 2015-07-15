@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Flo\Backend\Classes\EditableColumnsException;
+use Flo\Backend\Traits\Query;
+use Flo\Backend\Traits\Worker;
 
 use Request;
 
@@ -17,7 +19,7 @@ use Request;
  */
 class ViewFactory
 {
-	use \Flo\Backend\Traits\QueryTrait;
+	use Query, Worker;
 
 	/**
 	 * Fields returned in view
@@ -25,13 +27,6 @@ class ViewFactory
 	 * @var array
 	 */
 	private $fields;
-
-	/**
-	 * Instance of Worker
-	 *
-	 * @var Flo\Backend\Worker
-	 */
-	private $worker;
 
 	/**
 	 * Actions displayed in menu
@@ -84,7 +79,6 @@ class ViewFactory
 	 */
 	public function __construct(array $actions, $model, $controller, $search = null, $pagination = null)
 	{
-		$this->worker = new Worker($model);
 		$this->actions = $actions;
 		$this->fields = [];
 		$this->model = $model;
@@ -92,7 +86,7 @@ class ViewFactory
 		$this->search = $search;
 		$this->pagination = $pagination;
 
-		$displayed_columns = $this->worker->checkColumnsForRelation();
+		$displayed_columns = $this->checkColumnsForRelation();
 
 		// Model Initiation
 		if (isset($displayed_columns['id']))

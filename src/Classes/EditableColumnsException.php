@@ -4,6 +4,8 @@ namespace Flo\Backend\Classes;
 
 /**
  * Exception if the $editable_columns variable is missingor empty
+ *
+ * @return \Exception
  */
 class EditableColumnsException extends \Exception
 {

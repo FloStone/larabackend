@@ -5,16 +5,19 @@ namespace Flo\Backend\Classes;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
+use Flo\Backend\Traits\Worker;
 
 /**
  * Class recombinator recombines a Collection to an array with working relation output
  *
  * @package  Flo\Backend
  */
-class Recombinator
+abstract class Recombinator
 {
+	use Worker;
+
 	/**
-	 * Create the recombined array
+	 * Create the recombined array without set fields
 	 *
 	 * @param Collection $data
 	 * @return array
@@ -28,7 +31,7 @@ class Recombinator
 
 		foreach($data as $item)
 		{
-			$methods = Worker::getClassMethods(get_class($item));
+			$methods = $this->getClassMethods(get_class($item));
 
 			$origin = static::arrayValuesToString($item->getOriginal());
 
@@ -43,7 +46,12 @@ class Recombinator
 		return $collection->toArray();
 	}
 
-	public static function var_set($data)
+	/**
+	 * Create recombined array with set fields
+	 *
+	 * @param Collection $data
+	 */
+	public static function var_set(Collection $data)
 	{
 		$collection = new EloquentCollection;
 
@@ -60,8 +68,9 @@ class Recombinator
 				if (isset($properties['relation']))
 				{
 					$method = $properties['relation']['method'];
+					$display = isset($properties['relation']['display']) ? $properties['relation']['display'] : null;
 
-					$new[] = static::getRelationItems($item, $method);
+					$new[] = static::getRelationItems($item, $method, $display);
 				}
 				else
 				{
@@ -75,6 +84,14 @@ class Recombinator
 		return $collection->toArray();
 	}
 
+	/**
+	 * Get the relation items
+	 *
+	 * @param Model $item
+	 * @param string $method
+	 * @param string $display
+	 * @return string
+	 */
 	public static function getRelationItems(Model $item, $method, $display = null)
 	{
 		if ($item->$method instanceof EloquentCollection || $item->$method instanceof Collection)
@@ -94,7 +111,10 @@ class Recombinator
 		{
 			$relation_item = $item->$method;
 
-			return static::getFirstArrayEntry($relation_item);
+			if ($display)
+				return $relation_item->$display;
+			else
+				return static::getFirstArrayEntry($relation_item);
 		}
 	}
 
@@ -123,6 +143,13 @@ class Recombinator
 		return array_shift($relation_array);
 	}
 
+	/**
+	 * Convert all values of an array to a string
+	 * Resolves problems with integer numbers
+	 *
+	 * @param array $array
+	 * @return array
+	 */
 	public static function arrayValuesToString(array $array)
 	{
 		$fixed = [];

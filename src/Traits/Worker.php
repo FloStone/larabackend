@@ -1,22 +1,11 @@
 <?php
 
-namespace Flo\Backend\Classes;
+namespace Flo\Backend\Traits;
 
 use Schema;
 
-class Worker
+trait Worker
 {
-	/**
-	 * Initialization
-	 *
-	 * @param string $model
-	 * @return void
-	 */
-	public function __construct($model)
-	{
-		$this->model = $model;
-	}
-
 	/**
 	 * Generates a query to use search using $searchable_fields
 	 *
@@ -74,7 +63,7 @@ class Worker
 		return $array;
 	}
 
-	public static function getClassMethods($class)
+	public function getClassMethods($class)
 	{
 		$methods = [];
 		$reflection = new \ReflectionClass($class);

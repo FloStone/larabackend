@@ -4,7 +4,7 @@ namespace Flo\Backend\Traits;
 
 use Request;
 
-trait QueryTrait
+trait Query
 {
 	/**
 	 * Custom query added by user
@@ -62,7 +62,7 @@ trait QueryTrait
 			$object = $object->whereRaw(delete_first_word($query));
 
 		if ($this->search)
-			$object = $object->whereRaw($this->worker->getSearchQuery($this->search));
+			$object = $object->whereRaw($this->getSearchQuery($this->search));
 
 		$object = $object->orderBy(Request::input('order', 'id'), Request::input('destination', 'asc'))->paginate($this->pagination);
 

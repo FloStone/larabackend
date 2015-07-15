@@ -3,6 +3,7 @@
 define('EDIT', 'edit');
 define('DELETE', 'delete');
 define('ADD', 'add');
+define('HUHU', 'HUHU');
 
 if (!function_exists('norm_action'))
 {
