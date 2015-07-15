@@ -1,25 +1,26 @@
 @use(Illuminate\Database\Eloquent\Collection)
 @define($model = $data['model'])
 @define($dest = Request::input('destination') ? Request::input('destination') == 'asc' ? 'desc' : 'asc' : 'asc')
+@define($order = Request::input('order'))
 <div class="table">
 	<table>
 		<thead>
 			<tr>
 				@if(!isset($model::$displayed_columns['id']))
-					<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.$dest}}">ID</a></th>
+					<th><a href="{{Request::url().'?order=id&#38;destination='.($order == 'id' ? $dest : 'asc')}}" class="{{$order == 'id' ? 'order '.$dest : ''}}">ID</a></th>
 				@endif
 				@foreach($model::$displayed_columns as $head => $properties)
 					@if(isset($properties['label']))
 						@if(isset($properties['relation']))
 							<th>{{$properties['label']}}</th>
 						@else
-							<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.$dest}}">{{$properties['label']}}</a></th>
+							<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.($head == $order ? $dest : 'asc')}}" class="{{$order == $head ? 'order '.$dest : ''}}">{{$properties['label']}}</a></th>
 						@endif
 					@else
 						@if(isset($properties['relation']))
 							<th>{{$head}}</th>
 						@else
-							<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.$dest}}">{{$head}}</a></th>
+							<th><a href="{{Request::url().'?order='.$head.'&#38;destination='.($head == $order ? $dest : 'asc')}}" class="{{$order == $head ? 'order '.$dest : ''}}">{{$head}}</a></th>
 						@endif
 					@endif
 				@endforeach

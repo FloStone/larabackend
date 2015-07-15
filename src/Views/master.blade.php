@@ -23,6 +23,7 @@
 		@endforeach
 		@endif
 		@yield('content')
+		@include('Backend::includes.footer')
 	</body>
 
 </html>

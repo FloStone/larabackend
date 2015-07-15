@@ -102,6 +102,35 @@ nav {
 						&:hover {
 							text-decoration: underline;
 						}
+						&.order {
+							position: relative;
+							&.asc {
+								&:after {
+									position: absolute;
+									content:'';
+									width: 0; 
+									height: 0; 
+									border-left: 5px solid transparent;
+									border-right: 5px solid transparent;
+									border-top: 7px solid black;
+									top:7px;
+									right:-15px;
+								}
+							}
+							&.desc {
+								&:after {
+									position: absolute;
+									content:'';
+									width: 0; 
+									height: 0; 
+									border-left: 5px solid transparent;
+									border-right: 5px solid transparent;
+									border-bottom: 7px solid black;
+									top:7px;
+									right:-15px;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -203,4 +232,10 @@ form {
 			text-decoration: underline;
 		}
 	}
+}
+
+//FOOTER
+footer {
+	height:200px;
+	width:100%;
 }
