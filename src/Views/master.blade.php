@@ -1,9 +1,11 @@
 <!doctype html>
 
 <html>
-	
+
 	<head>
 		<link rel="stylesheet" href="{{asset('css/admin.css')}}">
+		<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
 		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
 		<link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 		<meta charset="utf-8">
@@ -25,5 +27,14 @@
 		@yield('content')
 		@include('Backend::includes.footer')
 	</body>
+
+	<script>
+	$(document).ready(function(){
+		tinymce.init({
+			selector: "textarea",
+			body_class: "wysewyg_textarea"
+		})
+	})
+	</script>
 
 </html>

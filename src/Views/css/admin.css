@@ -142,15 +142,18 @@ form {
   margin: 20px;
 }
 form input,
-form textarea {
+form textarea,
+form .textarea {
   display: block;
   border-radius: 4px;
   padding: 4px;
   border: 1px solid lightgrey;
   min-width: 600px;
 }
-form textarea {
+form textarea,
+form .textarea {
   min-height: 400px;
+  width: 600px;
 }
 form input[type="checkbox"] {
   width: auto;
@@ -160,6 +163,7 @@ form label {
 }
 form .formfield {
   margin-top: 10px;
+  width: 600px;
 }
 form .submit-button {
   margin-top: 20px;

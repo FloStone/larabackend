@@ -40,7 +40,7 @@
 				</td>
 				@if($data['data']->first())
 					@foreach($model::$displayed_columns as $item)
-						<td></td>	
+						<td></td>
 					@endforeach
 					<td></td>
 					<td></td>
@@ -70,10 +70,10 @@
 								@elseif($properties['type'] == 'file')
 								<td><a href="{{asset($item->$column)}}">Download</a></td>
 								@else
-								<td>{{$item->$column}}</td>
+								<td>{!! $item->$column !!}</td>
 								@endif
 							@else
-								<td>{{$item->$column}}</td>
+								<td>{!! $item->$column !!}</td>
 							@endif
 						@endif
 					@endforeach

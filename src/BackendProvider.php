@@ -11,12 +11,13 @@ class BackendProvider extends ServiceProvider
 		$this->loadViewsFrom(__DIR__.'/Views', 'Backend');
 
 		$this->publishes([
-			__DIR__.'/Views/css' => public_path('/css')
+			__DIR__.'/Views/css' => public_path('/css'),
+			__DIR__.'/Views/js' => public_path('/js')
 		]);
 	}
 
 	public function register()
 	{
-		
+
 	}
 }
