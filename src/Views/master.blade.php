@@ -31,8 +31,7 @@
 	<script>
 	$(document).ready(function(){
 		tinymce.init({
-			selector: "textarea",
-			body_class: "wysewyg_textarea"
+			selector: "textarea"
 		})
 	})
 	</script>
