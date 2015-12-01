@@ -147,7 +147,10 @@ form textarea {
   border-radius: 4px;
   padding: 4px;
   border: 1px solid lightgrey;
-  width: 250px;
+  min-width: 600px;
+}
+form textarea {
+  min-height: 400px;
 }
 form input[type="checkbox"] {
   width: auto;
