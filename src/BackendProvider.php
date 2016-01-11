@@ -12,7 +12,8 @@ class BackendProvider extends ServiceProvider
 
 		$this->publishes([
 			__DIR__.'/Views/css' => public_path('/css'),
-			__DIR__.'/Views/js' => public_path('/js')
+			__DIR__.'/Views/js' => public_path('/js'),
+			__DIR__.'/Config'	=> base_path('config')
 		]);
 	}
 

@@ -198,7 +198,6 @@ class ViewFactory
 					$this->resolved = true;
 				}
 			}
-			
 			return call_user_func_array([$this, $method], $arguments);
 		}
 	}

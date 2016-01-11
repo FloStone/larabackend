@@ -25,7 +25,7 @@ class HTMLTranslator
 		'integer'	=> 'text',
 		'int'		=> 'text',
 		'password'	=> 'password',
-		'pass'		=> 'pass',
+		'pass'		=> 'password',
 		'checkbox'	=> 'checkbox',
 		'boolean'	=> 'checkbox',
 		'select'	=> 'select',

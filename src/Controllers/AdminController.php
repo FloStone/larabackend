@@ -117,7 +117,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	{
 		// Convert model string back to readable
 		$model = class_replace($model);
-		
+
 		return (new View(static::$displayed_actions, $model, $this->getChildController()))->addForm(EDIT, $id)->render();
 	}
 
@@ -170,7 +170,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	/**
 	 * Add an instance of a model
 	 * POST request
-	 * 
+	 *
 	 * @param string $model
 	 * @return void
 	 */
@@ -181,14 +181,14 @@ abstract class AdminController extends BaseController implements AdminInterface
 		$class = new $model;
 
 		$this->workOnModel($class, $model);
-		
+
 		return redirect(Session::get('last_page'));
 	}
 
 	/**
 	 * Delete an instance of a model
 	 * POST request
-	 * 
+	 *
 	 * @param int $id
 	 * @param string $model
 	 * @return void
@@ -227,6 +227,10 @@ abstract class AdminController extends BaseController implements AdminInterface
 				$file->move(public_path('uploads/files/'), $filename);
 
 				$class->$column = "uploads/files/$filename";
+			}
+			elseif (isset($properties['type']) && HTMLTranslator::type($properties['type']) == 'password')
+			{
+				$class->$column = bcrypt(Input::get($column));
 			}
 			else
 			{

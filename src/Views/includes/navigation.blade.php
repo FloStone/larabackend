@@ -10,9 +10,11 @@
 		@endif
 	</ul>
 	@if(isset($active))
+	@if(Config::get('larabackend_config.search'))
 	<form method="get" action="{{action($controller.'@'.$active)}}">
 		<input type="search" name="search" placeholder="Search..." value="{{Request::input('search') ?: ''}}">
 	</form>
+	@endif
 	<div class="logout">
 		<a href="{{action($controller.'@getLogout')}}">
 			Logout
