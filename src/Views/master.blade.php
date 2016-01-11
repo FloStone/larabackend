@@ -31,7 +31,13 @@
 	<script>
 	$(document).ready(function(){
 		tinymce.init({
-			selector: "textarea"
+			selector: "textarea",
+			menubar: false,
+			plugins: "code link textcolor directionality image",
+			toolbar: [
+				"undo redo cut copy paste | fontsizeselect | forecolor backcolor ",
+				"code | link unlink | ltr rlt | image"
+			]
 		})
 	})
 	</script>
