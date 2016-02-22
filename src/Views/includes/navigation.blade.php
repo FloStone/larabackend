@@ -10,7 +10,7 @@
 		@endif
 	</ul>
 	@if(isset($active))
-	@if(Config::get('larabackend_config.search'))
+	@if(Config::get('larabackend_config.search', true))
 	<form method="get" action="{{action($controller.'@'.$active)}}">
 		<input type="search" name="search" placeholder="Search..." value="{{Request::input('search') ?: ''}}">
 	</form>
