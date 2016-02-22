@@ -18,6 +18,7 @@ use Session;
 use Request;
 use File;
 use Auth;
+use URL;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -56,7 +57,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 	 */
 	public function __construct()
 	{
-		$uri = implode('/', Request::segments());
+		$uri = URL::full();
 
 		if ($uri != Session::get('current_page'))
 		{
