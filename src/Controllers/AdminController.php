@@ -41,7 +41,7 @@ abstract class AdminController extends BaseController implements AdminInterface
 {
 	use DispatchesJobs, ValidatesRequests;
 
-	const VERSION = '1.1.4';
+	const VERSION = '1.1.5';
 
 	/**
 	 * Actions displayed in the menu

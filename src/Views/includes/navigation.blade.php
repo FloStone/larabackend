@@ -12,7 +12,7 @@
 	@if(isset($active))
 	@if(Config::get('larabackend_config.search', true))
 	<form method="get" action="{{action($controller.'@'.$active)}}">
-		<input type="search" name="search" placeholder="Search..." value="{{Request::input('search') ?: ''}}">
+		<input type="search" name="search" placeholder="Search..." value="{{ input('search') ?: ''}}">
 	</form>
 	@endif
 	<div class="logout">

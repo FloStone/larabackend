@@ -78,8 +78,8 @@
 						@endif
 					@endforeach
 					@if($data['editable'])
-					<td class="editable"><a href="{{action($controller.'@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}">Edit</a></td>
-					<td class="editable"><a href="{{action($controller.'@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}">Delete</a></td>
+					<td class="editable"><a href="{{action($controller.'@getEdit', ['id' => $item->id, 'model' => class_replace($model)])}}" class="edit">Edit</a></td>
+					<td class="editable"><a href="{{action($controller.'@getDelete', ['id' => $item->id, 'model' => class_replace($model)])}}" class="delete">Delete</a></td>
 					@endif
 				</tr>
 				@endforeach
@@ -89,4 +89,11 @@
 	<div class="pagination-container">
 		{!!$data['data']->appends(Request::input())->render()!!}
 	</div>
+	@if(Config::get('larabackend_config.highlighting', true))
+	<style>
+		.table table tbody tr:hover {
+			background-color:#f9fad2 !important;
+		}
+	</style>
+	@endif
 </div>

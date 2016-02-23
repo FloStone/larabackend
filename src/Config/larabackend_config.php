@@ -6,6 +6,6 @@
  */
 
 return [
-	'search'		=> true,
-	'navColor'		=> '#1f1f14'
+	'search'			=> true,
+	'highlighting'		=> true
 ];
