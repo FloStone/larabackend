@@ -16,7 +16,10 @@ body {
   font-family: 'Open Sans';
 }
 nav {
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
 }
 nav ul {
   height: 40px;
