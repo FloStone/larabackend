@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend\Commands;
+namespace FloStone\Backend\Commands;
 
 use Illuminate\Console\Command;
 

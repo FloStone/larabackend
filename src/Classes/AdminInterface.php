@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend\Classes;
+namespace FloStone\Backend\Classes;
 
 interface AdminInterface
 {

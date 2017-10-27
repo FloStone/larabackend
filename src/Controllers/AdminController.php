@@ -11,7 +11,7 @@
 | #         # ###    #     #     # # #     ## |
 \*********************************************/
 
-namespace Flo\Backend\Controllers;
+namespace FloStone\Backend\Controllers;
 
 use Input;
 use Session;

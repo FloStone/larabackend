@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend\Classes;
+namespace FloStone\Backend\Classes;
 
 /**
  * Exception when a model does not exist

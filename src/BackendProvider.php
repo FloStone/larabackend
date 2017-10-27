@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend;
+namespace FloStone\Backend;
 
 use Illuminate\Support\ServiceProvider;
 

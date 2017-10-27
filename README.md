@@ -4,11 +4,11 @@
 
 ###Add packages to composer.json:
 
-"flo5581/larahelpers" : "1.0.*"
+"flostone/larahelpers" : "1.0.*"
 
 Add to Kernel.php in App\Console:
 
-`\Flo\Backend\Commands\AdminInstallation::class`
+`\FloStone\Backend\Commands\AdminInstallation::class`
 
 ###Register Service Provider:
 
@@ -26,14 +26,14 @@ Execute:
 
 This will work with Laravel 5.0.* however you need to use strings instead of ::class<br>
 Example:<br>
-`'\Flo\Backend\Commands\AdminInstallation'`
+`'\FloStone\Backend\Commands\AdminInstallation'`
 
 ##Basic Usage
 
 Before you do anything:
 Create a controller that extends
 
-`Flo\Backend\Controllers\AdminController`
+`FloStone\Backend\Controllers\AdminController`
 
 and add the controller to your `routes.php` using
 

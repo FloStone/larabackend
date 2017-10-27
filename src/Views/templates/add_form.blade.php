@@ -1,4 +1,4 @@
-@use(Flo\Backend\Classes\HTMLTranslator)
+@use(FloStone\Backend\Classes\HTMLTranslator)
 <div class="form">
 	<form method="post" action="{{action($controller.'@postAdd', ['model' => class_replace($data['model'])])}}" enctype="multipart/form-data">
 	@foreach($data['formfields'] as $column => $properties)

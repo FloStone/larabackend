@@ -1,7 +1,7 @@
 @use(Illuminate\Support\Collection)
 @use(Illuminate\Database\Eloquent\Collection as EloquentCollection)
 @use(Illuminate\Database\Eloquent\Model)
-@use(Flo\Backend\Classes\Recombinator)
+@use(FloStone\Backend\Classes\Recombinator)
 @define($model = get_class($data['model']))
 <div class="form">
 <h2>Are you sure you want to delete this ?</h2>

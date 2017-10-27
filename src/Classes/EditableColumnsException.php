@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend\Classes;
+namespace FloStone\Backend\Classes;
 
 /**
  * Exception if the $editable_columns variable is missingor empty

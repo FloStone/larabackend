@@ -1,4 +1,4 @@
-@use(Flo\Backend\Classes\HTMLTranslator)
+@use(FloStone\Backend\Classes\HTMLTranslator)
 @define($model = get_class($data['model']))
 <div class="form">
 	<form method="post" action="{{action($controller.'@postEdit', ['id' => $data['model']->id, 'model' => class_replace(get_class($data['model']))])}}" enctype="multipart/form-data">

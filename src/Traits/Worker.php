@@ -1,6 +1,6 @@
 <?php
 
-namespace Flo\Backend\Traits;
+namespace FloStone\Backend\Traits;
 
 use Schema;
 
